@@ -1,1 +1,26 @@
+library(DT)
+library(dashboardthemes)
+library(data.table)
+library(formattable)
+library(scales) #
+library(shinycssloaders)
+library(shinydashboard)
+library(shinyjs)
+library(shinyWidgets)
+library(summarytools)
+library(tidyverse)
+library(magrittr)
+library(lubridate)
+library(plotly)
+library(devtools)
+library(readxl)
+library(vtreat)
+library(skimr)
 
+
+source('functions/fun_helper.R')
+source('functions/fun_io.R')
+source('functions/fun_plots.R')
+
+source('ui/ui_model.R')
+source('ui/ui_info.R')
