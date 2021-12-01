@@ -1,6 +1,5 @@
-library(shiny)
+####--SERVER------------------------------------------------------------------------------------------------
 
-# Define server logic required to draw a histogram
 shinyServer(function(input, output, session, options = options(warn = -1)) {
   
   ####--UI BLOCK----------------------------------------------------------------------------------------------
@@ -10,7 +9,6 @@ shinyServer(function(input, output, session, options = options(warn = -1)) {
     fluidRow(
       column(12, offset = 1, 
              br(),
-             h5(str_c("Version ", current_version)),
       )
     )
   })
@@ -55,5 +53,3 @@ shinyServer(function(input, output, session, options = options(warn = -1)) {
   source('server/s_info.R', local = TRUE)
   
 })  
-
-})
