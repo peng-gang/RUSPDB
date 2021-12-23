@@ -5,8 +5,22 @@ sex_group <- c("Male", "Female")
 bw_group <- c("1000-2499", "2500-3000", "3001-3500", "3501-4000", "4001-5000")
 ga_group <- c("28-36", "37-38", "39-40", "41",  "42")
 race_group <- c("Asian", "Black", "Hispanic", "White")
+race_group_details <- c(
+  "Asian East Indian", "Black", "Cambodian",         
+  "Chinese", "Filipino", "Guamanian",    
+  "Hawaiian", "Hispanic", "Japanese", 
+  "Korean", "Laos", "Middle Eastern", 
+  "Native American", "Other Southeast Asian", "Samoan", 
+  "Vietnamese", "White"  
+)
 tpn_group <- c("NoTPN", "TPN")
 compare_group <- c("No Comparison", "Sex", "Birth Weight", "Gestational Age", "Race/Ethnicity", "TPN")
+
+# range of birth weight, newborns with birth weight less than 1000g or more than 5000g are not included in the analysis
+bw_range <- c(1000, 5000)
+# range of gestational age, newborns with gestational age less than 28 weeks or more than 42 weeks are not included in the analysis
+ga_range <- c(28, 42)
+
 
 analytes_all <- c(
   "Glycine", "Alanine", "Proline", "Valine", "5-Oxoproline", "Leucine/Isoleucine", "Ornithine", "Methionine", "Arginine", "Citrulline", 
