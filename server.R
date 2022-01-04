@@ -6,7 +6,7 @@ library(plotly)
 source("parameters.R")
 source("functions.R")
 
-load('/Users/oliviazhang/Desktop/500KClean.RData')
+load('data/500KCleanDec2221.RData')
 meta_data$race <- flag_race
 meta_data$aac <- aac
 meta_data$birthweight <- flag_bw
@@ -1127,4 +1127,24 @@ shinyServer(function(input, output, session) {
     btnTrendPlot()
   })
   
+  
+  output$uiEthMC <- renderUI({
+    switch(input$ethMCSel,
+           "1" = selectInput(
+             "ethMC",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(race_group),
+             multiple = TRUE,
+             selected = 1
+           ),
+           
+           "2" = selectInput(
+             "gaMC",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(race_group_details),
+             multiple = TRUE,
+             selected = 1
+           )
+        )
+  })
 })

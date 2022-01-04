@@ -896,7 +896,115 @@ shinyUI(navbarPage(
            ) 
   ),
   
-  tabPanel("Multiple Comparison"
-           
+  tabPanel(
+      "Multiple Comparison",
+      sidebarLayout(
+          sidebarPanel(
+              width = 3,
+              tabsetPanel(
+                  type = "tabs",
+                  id = "multiCompare",
+                  tabPanel(
+                      "Analyte(s)",
+                      value = "analytesMC",
+                      tags$div(
+                          title = "Select one or multiple analytes",
+                          selectInput(
+                              "analyteMC",
+                              label = h4("Analyte"),
+                              choices = makeList(analytes_all),
+                              multiple = TRUE,
+                              selected = which(analytes_all=="C3")
+                          )
+                      ),
+                      
+                      hr(),
+                      
+                      tags$div(
+                          title = "Select birth weight range to compare",
+                          selectInput(
+                              "bwMC", 
+                              label = h4("Birth Weight (g)"),
+                              choices = makeList(bw_group),
+                              multiple = TRUE,
+                              selected = 2:4
+                            )
+                      ),
+                      
+                      
+                      
+                      tags$div(
+                          title = "Select gestational age range to compare",
+                          selectInput(
+                              "gaMC",
+                              label = h4("Gestational Age (week)"),
+                              choices = makeList(ga_group),
+                              multiple = TRUE,
+                              selected = 2:4
+                          )
+                      ),
+                      
+                      
+                      hr(),
+                      
+                      
+                      tags$div(
+                          title = "Select a ethnicity group to compare",
+                          radioButtons(
+                              "ethMCSel",
+                              label = NULL,
+                              choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                              selected = 1
+                          ),
+                          
+                          uiOutput("uiEthMC")
+                      ),
+                      
+                      tags$div(
+                          title = "Select a range of age at boold collection to compare",
+                          selectInput(
+                              "aabcMC",
+                              label = h4("Age at Blood Collection (hour)"),
+                              choices = makeList(aabc_group),
+                              multiple = TRUE,
+                              selected = 2
+                          )
+                      ),
+                      
+                      
+                      tags$div(
+                          title = "Select sex to compare",
+                          selectInput(
+                              "sexMC",
+                              label = h4("Sex"),
+                              choices = makeList(c("Male", "Female")),
+                              multiple = TRUE,
+                              selected = 1
+                          )
+                      ),
+                      
+                      tags$div(
+                          title = "Select TPN status to compare",
+                          selectInput(
+                              "tpnMC",
+                              label = h4("Status of Total Parenteral Nutrition"),
+                              choices = makeList(c("TPN", "NoTPN")),
+                              multiple = TRUE,
+                              selected = 1
+                          )
+                      ),
+                      
+                      hr(),
+                      
+                      actionButton("mcSubmit", "Submit")
+                  ),
+                  tabPanel(
+                      "Ratios",
+                      value = "ratioMC"
+                  )
+              )
+          ),
+          mainPanel()
+      )
   )
 ))
