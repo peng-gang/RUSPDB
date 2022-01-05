@@ -433,7 +433,7 @@ shinyUI(navbarPage(
                      title = "Select TPN status to include in the figure",
                      checkboxGroupInput(
                        "tpn",
-                       label = h4("TPN"),
+                       label = h4("TPN Status"),
                        choices = makeList(tpn_group),
                        selected = 1
                      )
@@ -927,7 +927,7 @@ shinyUI(navbarPage(
                               label = h4("Birth Weight (g)"),
                               choices = makeList(bw_group),
                               multiple = TRUE,
-                              selected = 2:4
+                              selected = 1
                             )
                       ),
                       
@@ -940,7 +940,7 @@ shinyUI(navbarPage(
                               label = h4("Gestational Age (week)"),
                               choices = makeList(ga_group),
                               multiple = TRUE,
-                              selected = 2:4
+                              selected = 1
                           )
                       ),
                       
@@ -967,7 +967,7 @@ shinyUI(navbarPage(
                               label = h4("Age at Blood Collection (hour)"),
                               choices = makeList(aabc_group),
                               multiple = TRUE,
-                              selected = 2
+                              selected = 1
                           )
                       ),
                       
@@ -977,7 +977,7 @@ shinyUI(navbarPage(
                           selectInput(
                               "sexMC",
                               label = h4("Sex"),
-                              choices = makeList(c("Male", "Female")),
+                              choices = makeList(sex_group),
                               multiple = TRUE,
                               selected = 1
                           )
@@ -988,7 +988,7 @@ shinyUI(navbarPage(
                           selectInput(
                               "tpnMC",
                               label = h4("Status of Total Parenteral Nutrition"),
-                              choices = makeList(c("TPN", "NoTPN")),
+                              choices = makeList(tpn_group),
                               multiple = TRUE,
                               selected = 1
                           )
@@ -1004,7 +1004,11 @@ shinyUI(navbarPage(
                   )
               )
           ),
-          mainPanel()
+          mainPanel(
+              plotlyOutput("figureMC"),
+              hr(),
+              htmlOutput("infoMC")
+          )
       )
   )
 ))

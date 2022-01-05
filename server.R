@@ -5,15 +5,16 @@ library(plotly)
 
 source("parameters.R")
 source("functions.R")
+source("functionsMC.R")
 
-load('data/500KCleanDec2221.RData')
-meta_data$race <- flag_race
-meta_data$aac <- aac
-meta_data$birthweight <- flag_bw
-meta_data$ga <- flag_ga
-meta_data$sex <- flag_sex
-meta_data$tpn <- flag_tpn
-meta_data$include <- idx_include
+load('data/500KCleanJan0422.RData')
+# meta_data$race <- flag_race
+# meta_data$aac <- aac
+# meta_data$birthweight <- flag_bw
+# meta_data$ga <- flag_ga
+# meta_data$sex <- flag_sex
+# meta_data$tpn <- flag_tpn
+# meta_data$include <- idx_include
 
 shinyServer(function(input, output, session) {
   btnBoxPlot <- eventReactive(c(input$btnSingle, input$btnRatio), {
@@ -1128,23 +1129,61 @@ shinyServer(function(input, output, session) {
   })
   
   
+  
+  ############################
+  ###  Multiple Comparison ###
+  ############################
+  
+  #ethnicity selection: major groups or detailed groups
   output$uiEthMC <- renderUI({
     switch(input$ethMCSel,
            "1" = selectInput(
              "ethMC",
              label = h4("Major Ethnicity Groups"),
-             choices = makeList(race_group),
+             choices = makeList(ethnicity_group),
              multiple = TRUE,
              selected = 1
            ),
            
            "2" = selectInput(
-             "gaMC",
+             "ethMC",
              label = h4("Detailed Ethnicity Groups"),
-             choices = makeList(race_group_details),
+             choices = makeList(ethnicity_group_details),
              multiple = TRUE,
              selected = 1
            )
         )
+  })
+  
+  plotMC <- eventReactive(c(input$mcSubmit),{
+    if(input$multiCompare == "analytesMC"){
+      return(plotMCAnalytes(
+        input$analyteMC, input$bwMC, input$gaMC, input$ethMCSel, input$ethMC, 
+        input$aabcMC, input$sexMC, input$tpnMC
+      ))
+    } else {
+      return(plotMCRatio())
+    }
+  })
+  
+  getMCInfo <- eventReactive(c(input$mcSubmit),{
+    if(input$multiCompare == "analytesMC"){
+      return(getMCInfoAnalytes(
+        input$analyteMC, input$bwMC, input$gaMC, input$ethMCSel, input$ethMC, 
+        input$aabcMC, input$sexMC, input$tpnMC
+      ))
+    } else {
+      return(getMCInfoRatio())
+    }
+   
+  })
+  
+  output$figureMC <- renderPlotly({
+    plotMC()
+  })
+  
+  
+  output$infoMC <- renderUI({
+    getMCInfo()
   })
 })
