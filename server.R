@@ -1134,7 +1134,7 @@ shinyServer(function(input, output, session) {
   ###  Multiple Comparison ###
   ############################
   
-  #ethnicity selection: major groups or detailed groups
+  #ethnicity selection: major groups or detailed groups (analytes panel)
   output$uiEthMC <- renderUI({
     switch(input$ethMCSel,
            "1" = selectInput(
@@ -1155,27 +1155,59 @@ shinyServer(function(input, output, session) {
         )
   })
   
-  plotMC <- eventReactive(c(input$mcSubmit),{
+  
+  #ethnicity selection: major groups or detailed groups (ratio panel)
+  output$uiEthMCRatio <- renderUI({
+    switch(input$ethMCSelRatio,
+           "1" = selectInput(
+             "ethMCRatio",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1
+           ),
+           
+           "2" = selectInput(
+             "ethMCRatio",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1
+           )
+    )
+  })
+  
+  
+  # boxplot for multiple comparison
+  plotMC <- eventReactive(c(input$mcSubmit, input$mcRatioSubmit, input$multiCompare),{
     if(input$multiCompare == "analytesMC"){
       return(plotMCAnalytes(
         input$analyteMC, input$bwMC, input$gaMC, input$ethMCSel, input$ethMC, 
         input$aabcMC, input$sexMC, input$tpnMC
       ))
     } else {
-      return(plotMCRatio())
+      return(plotMCRatio(
+        input$numeratorMC, input$denominatorMC, input$bwMCRatio, input$gaMCRatio, 
+        input$ethMCSelRatio, input$ethMCRatio, 
+        input$aabcMCRatio, input$sexMCRatio, input$tpnMCRatio
+      ))
     }
   })
   
-  getMCInfo <- eventReactive(c(input$mcSubmit),{
+  # comparison information 
+  getMCInfo <- eventReactive(c(input$mcSubmit, input$mcRatioSubmit, input$multiCompare),{
     if(input$multiCompare == "analytesMC"){
       return(getMCInfoAnalytes(
         input$analyteMC, input$bwMC, input$gaMC, input$ethMCSel, input$ethMC, 
         input$aabcMC, input$sexMC, input$tpnMC
       ))
     } else {
-      return(getMCInfoRatio())
+      return(getMCInfoRatio(
+        input$numeratorMC, input$denominatorMC, input$bwMCRatio, input$gaMCRatio, 
+        input$ethMCSelRatio, input$ethMCRatio, 
+        input$aabcMCRatio, input$sexMCRatio, input$tpnMCRatio
+      ))
     }
-   
   })
   
   output$figureMC <- renderPlotly({

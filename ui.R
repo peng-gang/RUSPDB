@@ -1000,7 +1000,105 @@ shinyUI(navbarPage(
                   ),
                   tabPanel(
                       "Ratios",
-                      value = "ratioMC"
+                      value = "ratioMC",
+                      
+                      tags$div(
+                          title = "Select numerator and denominator for the ratio. If multiple analytes are selected in numerator or denominator, they will be added",
+                          selectInput(
+                              "numeratorMC",
+                              label = h4("Numerator"),
+                              choices = makeList(analytes_all),
+                              multiple = TRUE,
+                              selected = which(analytes_all=="C3")
+                          ),
+                          selectInput(
+                              "denominatorMC",
+                              label = h4("Denominator"),
+                              choices = makeList(analytes_all),
+                              multiple = TRUE,
+                              selected = which(analytes_all=="C2")
+                          )
+                      ),
+                      
+                      hr(),
+                      
+                      tags$div(
+                          title = "Select birth weight range to compare",
+                          selectInput(
+                              "bwMCRatio", 
+                              label = h4("Birth Weight (g)"),
+                              choices = makeList(bw_group),
+                              multiple = TRUE,
+                              selected = 1
+                          )
+                      ),
+                      
+                      
+                      
+                      tags$div(
+                          title = "Select gestational age range to compare",
+                          selectInput(
+                              "gaMCRatio",
+                              label = h4("Gestational Age (week)"),
+                              choices = makeList(ga_group),
+                              multiple = TRUE,
+                              selected = 1
+                          )
+                      ),
+                      
+                      
+                      hr(),
+                      
+                      
+                      tags$div(
+                          title = "Select a ethnicity group to compare",
+                          radioButtons(
+                              "ethMCSelRatio",
+                              label = NULL,
+                              choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                              selected = 1
+                          ),
+                          
+                          uiOutput("uiEthMCRatio")
+                      ),
+                      
+                      tags$div(
+                          title = "Select a range of age at boold collection to compare",
+                          selectInput(
+                              "aabcMCRatio",
+                              label = h4("Age at Blood Collection (hour)"),
+                              choices = makeList(aabc_group),
+                              multiple = TRUE,
+                              selected = 1
+                          )
+                      ),
+                      
+                      
+                      tags$div(
+                          title = "Select sex to compare",
+                          selectInput(
+                              "sexMCRatio",
+                              label = h4("Sex"),
+                              choices = makeList(sex_group),
+                              multiple = TRUE,
+                              selected = 1
+                          )
+                      ),
+                      
+                      tags$div(
+                          title = "Select TPN status to compare",
+                          selectInput(
+                              "tpnMCRatio",
+                              label = h4("Status of Total Parenteral Nutrition"),
+                              choices = makeList(tpn_group),
+                              multiple = TRUE,
+                              selected = 1
+                          )
+                      ),
+                      
+                      hr(),
+                      
+                      actionButton("mcRatioSubmit", "Submit")
                   )
               )
           ),
