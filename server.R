@@ -39,9 +39,6 @@ shinyServer(function(input, output, session) {
           )
         )
         
-        #updateSelectInput(
-        #  session, "analyte", selected = which(analytes_all=="C3")
-        #)
         
         return(NULL)
         
@@ -206,6 +203,7 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  #add heatmap here
   btnTrendPlot <- eventReactive(c(input$btnSingle, input$btnRatio), {
     metaData <- NULL
     bwIdx <- NULL
