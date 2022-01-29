@@ -2,11 +2,6 @@ library(shiny)
 library(markdown)
 library(plotly)
 #library(shinybusy)
-
-source("parameters.R")
-source("functions.R")
-
-library(shiny)
 library(shinythemes)
 
 
@@ -53,8 +48,8 @@ shinyUI(navbarPage(
                      title = "Select race/ethnicity group(s) to include in the figure",
                      selectInput("race2",
                                  label = h4("Race/Ethnicity"),
-                                 choices = makeList(race_group),
-                                 selected = 1:length(race_group))
+                                 choices = makeList(ethnicity_group),
+                                 selected = 1:length(ethnicity_group))
                    ),
                    
                    hr(),
@@ -143,8 +138,8 @@ shinyUI(navbarPage(
                      checkboxGroupInput(
                        "raceRatio2",
                        label = h4("Race/Ethnicity"),
-                       choices = makeList(race_group),
-                       selected = 1:length(race_group)
+                       choices = makeList(ethnicity_group),
+                       selected = 1:length(ethnicity_group)
                      )
                    ),
                    
@@ -232,8 +227,8 @@ shinyUI(navbarPage(
                      title = "Select race/ethnicity group(s) to include in the figure",
                      selectInput("race3",
                                  label = h4("Race/Ethnicity"),
-                                 choices = makeList(race_group),
-                                 selected = 1:length(race_group),
+                                 choices = makeList(ethnicity_group),
+                                 selected = 1:length(ethnicity_group),
                                  multiple = T)
                    ),
                    
@@ -313,8 +308,8 @@ shinyUI(navbarPage(
                      checkboxGroupInput(
                        "raceRatio3",
                        label = h4("Race/Ethnicity"),
-                       choices = makeList(race_group),
-                       selected = 1:length(race_group)
+                       choices = makeList(ethnicity_group),
+                       selected = 1:length(ethnicity_group)
                      )
                    ),
                    
@@ -403,8 +398,8 @@ shinyUI(navbarPage(
                      title = "Select race/ethnicity group(s) to include in the figure",
                      selectInput("race",
                                  label = h4("Race/Ethnicity"),
-                                 choices = makeList(race_group),
-                                 selected = 1:length(race_group),
+                                 choices = makeList(ethnicity_group),
+                                 selected = 1:length(ethnicity_group),
                                  multiple = T)
                    ),
                    
@@ -494,8 +489,8 @@ shinyUI(navbarPage(
                      checkboxGroupInput(
                        "raceRatio",
                        label = h4("Race/Ethnicity"),
-                       choices = makeList(race_group),
-                       selected = 1:length(race_group)
+                       choices = makeList(ethnicity_group),
+                       selected = 1:length(ethnicity_group)
                      )
                    ),
                    
@@ -586,8 +581,8 @@ shinyUI(navbarPage(
                      title = "Select race/ethnicity group(s) to include in the figure",
                      selectInput("race4",
                                  label = h4("Race/Ethnicity"),
-                                 choices = makeList(race_group),
-                                 selected = 1:length(race_group),
+                                 choices = makeList(ethnicity_group),
+                                 selected = 1:length(ethnicity_group),
                                  multiple = T)
                    ),
                    
@@ -758,8 +753,8 @@ shinyUI(navbarPage(
                      title = "Select race/ethnicity group(s) to include in the figure",
                      selectInput("race5",
                                  label = h4("Race/Ethnicity"),
-                                 choices = makeList(race_group),
-                                 selected = 1:length(race_group),
+                                 choices = makeList(ethnicity_group),
+                                 selected = 1:length(ethnicity_group),
                                  multiple = T)
                    ),
                    
@@ -849,8 +844,8 @@ shinyUI(navbarPage(
                      checkboxGroupInput(
                        "raceRatio5",
                        label = h4("Race/Ethnicity"),
-                       choices = makeList(race_group),
-                       selected = 1:length(race_group)
+                       choices = makeList(ethnicity_group),
+                       selected = 1:length(ethnicity_group)
                      )
                    ),
                    

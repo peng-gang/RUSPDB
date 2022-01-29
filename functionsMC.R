@@ -501,6 +501,8 @@ getMCInfoAnalytes <- function(
 }
   
 
+# information of comparing ratio between selected group and common group
+# input: selected index from ui
 getMCInfoRatio <- function(
   numeratorMC, denominatorMC, bwMC, gaMC, ethMCSel, ethMC, 
   aabcMC, sexMC, tpnMC){

@@ -2,12 +2,13 @@ library(shiny)
 library(plotly)
 #library(shinybusy)
 
+load('data/500KCleanJan0422.RData')
 
 source("parameters.R")
 source("functions.R")
 source("functionsMC.R")
 
-load('data/500KCleanJan0422.RData')
+
 # meta_data$race <- flag_race
 # meta_data$aac <- aac
 # meta_data$birthweight <- flag_bw
@@ -68,10 +69,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$race
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       sex_sel <- input$sex
@@ -165,10 +166,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$raceRatio
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       sex_sel <- input$sexRatio
@@ -257,10 +258,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$race
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       sex_sel <- input$sex
@@ -354,10 +355,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$raceRatio
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       sex_sel <- input$sexRatio
@@ -443,10 +444,10 @@ shinyServer(function(input, output, session) {
       
       
       race_sel <- input$race2
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       sex_sel <- input$sex2
@@ -540,10 +541,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$raceRatio2
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       sex_sel <- input$sexRatio2
@@ -629,10 +630,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$race3
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       
@@ -720,10 +721,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$raceRatio3
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       
@@ -800,10 +801,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$race4
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       
@@ -979,10 +980,10 @@ shinyServer(function(input, output, session) {
       }
       
       race_sel <- input$race5
-      if(length(race_sel) == length(race_group)){
+      if(length(race_sel) == length(ethnicity_group)){
         raceIdx <- rep(TRUE, nrow(meta_data))
       } else {
-        raceIdx <- flag_race %in% race_group[as.integer(race_sel)]
+        raceIdx <- flag_race %in% ethnicity_group[as.integer(race_sel)]
       }
       
       
