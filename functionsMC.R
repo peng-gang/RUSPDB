@@ -101,6 +101,16 @@ plotMCAnalytes <- function(
   
   idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxSex & idxTPN
   
+  if(sum(idxSel) == 0){
+    gp <- ggplot(data.frame(x=0.5, y=0.5, label = "No newborn in the selected group")) + 
+      geom_text(aes(x=x, y=y, label=label)) + 
+      scale_x_continuous(limits = c(0,1)) + 
+      scale_y_continuous(limits = c(0,1)) + 
+      theme_void() + theme(text = element_text(size = 24))
+    
+    return(gp)
+  }
+  
   idxCommon <- idx_include & 
     flag_bw %in% c("2500-3000", "3001-3500", "3501-4000") &
     flag_ga %in% c("37-38", "39-40", "41") & 
@@ -265,6 +275,16 @@ plotMCRatio <- function(
   
   idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxSex & idxTPN
   
+  if(sum(idxSel) == 0){
+    gp <- ggplot(data.frame(x=0.5, y=0.5, label = "No newborn in the selected group")) + 
+      geom_text(aes(x=x, y=y, label=label)) + 
+      scale_x_continuous(limits = c(0,1)) + 
+      scale_y_continuous(limits = c(0,1)) + 
+      theme_void() + theme(text = element_text(size = 24))
+    
+    return(gp)
+  }
+  
   idxCommon <- idx_include & 
     flag_bw %in% c("2500-3000", "3001-3500", "3501-4000") &
     flag_ga %in% c("37-38", "39-40", "41") & 
@@ -403,6 +423,10 @@ getMCInfoAnalytes <- function(
   
   
   idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxSex & idxTPN
+  
+  if(sum(idxSel) == 0){
+    return(HTML("No newborn in the selected group"))
+  }
   
   idxCommon <- idx_include & 
     flag_bw %in% c("2500-3000", "3001-3500", "3501-4000") &
@@ -611,6 +635,10 @@ getMCInfoRatio <- function(
   
   
   idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxSex & idxTPN
+  
+  if(sum(idxSel) == 0){
+    return(HTML("No newborn in the selected group"))
+  }
   
   idxCommon <- idx_include & 
     flag_bw %in% c("2500-3000", "3001-3500", "3501-4000") &
