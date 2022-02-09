@@ -1,7 +1,6 @@
 # functions for multiple comparison
 
 library(ggplot2)
-library(shiny)
 library(effsize)
 
 
@@ -75,11 +74,11 @@ plotMCAnalytes <- function(
   }
   
   if(ethMCSel == "1"){
-    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group)){
+    if(length(ethMC) > 0 && length(ethMC) < length(ethnicity_group)){
       idxEth <- ethnicity$eth_state %in% ethnicity_group[as.integer(ethMC)]
     }
   } else {
-    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group_details)){
+    if(length(ethMC) > 0 && length(ethMC) < length(ethnicity_group_details)){
       idxEth <- ethnicity$eth_detail %in% ethnicity_group_details[as.integer(ethMC)]
     }
   }
@@ -249,11 +248,11 @@ plotMCRatio <- function(
   }
   
   if(ethMCSel == "1"){
-    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group)){
+    if(length(ethMC) > 0 && length(ethMC) < length(ethnicity_group)){
       idxEth <- ethnicity$eth_state %in% ethnicity_group[as.integer(ethMC)]
     }
   } else {
-    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group_details)){
+    if(length(ethMC) > 0 && length(ethMC) < length(ethnicity_group_details)){
       idxEth <- ethnicity$eth_detail %in% ethnicity_group_details[as.integer(ethMC)]
     }
   }

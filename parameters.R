@@ -14,7 +14,7 @@ ethnicity_group_details <- c(
   "Vietnamese", "White"  
 )
 tpn_group <- c("NoTPN", "TPN")
-compare_group <- c("No Comparison", "Sex", "Birth Weight", "Gestational Age", "Race/Ethnicity", "TPN")
+compare_group <- c("No Comparison", "Sex", "Birth Weight", "Gestational Age", "Ethnicity", "TPN")
 
 # range of birth weight, newborns with birth weight less than 1000g or more than 5000g are not included in the analysis
 bw_range <- c(1000, 5000)
