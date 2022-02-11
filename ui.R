@@ -18,6 +18,29 @@ shinyUI(
       "About"
     ),
     
+    
+    #######
+    ## gestational age and birth weight
+    
+    tabPanel(
+      "GA and BW"
+    ),
+    
+    ######
+    ## ethnicity
+    
+    tabPanel(
+      "Ethnicity"
+    ),
+    
+    
+    ######
+    ## sex
+    
+    tabPanel(
+      "Sex"
+    ),
+    
     ####### 
     ## aabc
     tabPanel(
@@ -219,6 +242,13 @@ shinyUI(
           plotOutput("trendplotAabc")
         )
       )
+    ),
+    
+    ######
+    ## sex
+    
+    tabPanel(
+      "TPN"
     ),
     
     
