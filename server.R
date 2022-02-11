@@ -24,6 +24,7 @@ shinyServer(function(input, output, session) {
   ############################
   ## aabc
   
+  # ethnicity selection: major groups or detailed groups (analytes panel)
   output$uiEthAabc <- renderUI({
     switch(input$ethAabcSel,
            "1" = selectInput(
@@ -45,6 +46,7 @@ shinyServer(function(input, output, session) {
   })
   
   
+  # ethnicity selection: major groups or detailed groups (ratio panel)
   output$uiEthAabcRatio <- renderUI({
     switch(input$ethAabcSelRatio,
            "1" = selectInput(
@@ -66,6 +68,7 @@ shinyServer(function(input, output, session) {
   })
   
   
+  # boxplot comparing difference between aabc groups
   plotBoxplotAabc <- eventReactive(c(input$aabcSubmit, input$aabcRatioSubmit, input$AABC),{
     if(input$AABC == "analytesAabc"){
       return(plotBoxplotAabcAnalytes(
@@ -82,6 +85,7 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  # metabolic changes over aabc
   plotTrendplotAabc <- eventReactive(c(input$aabcSubmit, input$aabcRatioSubmit, input$AABC),{
     if(input$AABC == "analytesAabc"){
       return(

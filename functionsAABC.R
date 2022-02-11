@@ -1,5 +1,6 @@
 library(ggplot2)
 
+# boxplot of metabolits between aabc groups
 plotBoxplotAabcAnalytes <- function(
   analyteAabc, bwAabc, gaAabc, ethAabcSel, ethAabc, 
   sexAabc, tpnAabc, compareAabc){
@@ -36,6 +37,9 @@ plotBoxplotAabcAnalytes <- function(
     metaName <- paste(analytes_all[sort(as.integer(analyteAabc))], collapse = " + ")
   }
   
+  # if no or all items are selected, idx__ would be all TRUE
+  # for example, there are three categories in sex: Female   Male     NA 
+  # if no item or both Female and Male are selected, idxSex would be all TRUE
   idxBW <- rep(TRUE, nrow(meta_data))
   idxGA <- rep(TRUE, nrow(meta_data))
   idxEth <- rep(TRUE, nrow(meta_data))
@@ -97,7 +101,8 @@ plotBoxplotAabcAnalytes <- function(
   )
   #print(summary(dplot))
   
-  if(compareAabc=="1"){
+  
+  if(compareAabc=="1"){ # no comparison
     xTicks <- NULL
     for(a in aabc_group){
       num <- sum(dplot$aabc == a)
@@ -160,7 +165,7 @@ plotBoxplotAabcAnalytes <- function(
   
 }
 
-
+# boxplot of ratio between aabc groups
 plotBoxplotAabcRatio <- function(
   numeratorAabc, denominatorAabc, bwAabc, gaAabc, ethAabcSel, ethAabc, 
   sexAabc, tpnAabc, compareAabc
@@ -295,7 +300,7 @@ plotBoxplotAabcRatio <- function(
     stringsAsFactors = FALSE
   )
   
-  if(compareAabc=="1"){
+  if(compareAabc=="1"){ # no comparison
     xTicks <- NULL
     for(a in aabc_group){
       num <- sum(dplot$aabc == a)
@@ -358,7 +363,7 @@ plotBoxplotAabcRatio <- function(
 
 
 
-
+# trend of metabolic changes over aabc
 plotTrendplotAabcAnalytes <- function(
   analyteAabc, bwAabc, gaAabc, ethAabcSel, ethAabc, 
   sexAabc, tpnAabc, compareAabc
@@ -459,7 +464,7 @@ plotTrendplotAabcAnalytes <- function(
   
   #print(summary(dplot))
   
-  if(compareAabc == "1"){
+  if(compareAabc == "1"){ # no comparison
     gp <- ggplot(dplot) + geom_smooth(aes(x=aabc, y = x), method = "gam", formula = y ~ s(x, bs = "cs")) + 
       labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = metaName) + 
       scale_x_continuous(breaks = seq(0, 168, 24), minor_breaks = NULL) + 
@@ -506,7 +511,7 @@ plotTrendplotAabcAnalytes <- function(
 
 
 
-
+# trend of ratio changes over aabc
 plotTrendplotAabcRatio <- function(
   numeratorAabc, denominatorAabc, bwAabc, gaAabc, ethAabcSel, ethAabc, 
   sexAabc, tpnAabc, compareAabc
@@ -642,7 +647,7 @@ plotTrendplotAabcRatio <- function(
   
   #colnames(dplot) <- c(denomName, "aabc")
   
-  if(compareAabc == "1"){
+  if(compareAabc == "1"){ # no comparison
     gp <- ggplot(dplot) + geom_smooth(aes(x=aabc, y = x), method = "gam", formula = y ~ s(x, bs = "cs")) + 
       labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = denomName) + 
       scale_x_continuous(breaks = seq(0, 168, 24), minor_breaks = NULL) + 
