@@ -2,7 +2,7 @@ library(shiny)
 library(plotly)
 #library(shinybusy)
 
-#load('data/500KCleanJan0422.RData')
+load('data/500KCleanJan0422.RData')
 
 #source("parameters.R")
 #source("functions.R")
@@ -18,13 +18,75 @@ library(plotly)
 # meta_data$include <- idx_include
 
 shinyServer(function(input, output, session) {
+  output$uiEthsex <- renderUI({
+    switch(input$ethSexSel,
+           "1" = selectInput(
+             "ethSex",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethSex",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group_details)
+           )
+    )
+  })
+  
+  
+  output$uiEthSexRatio <- renderUI({
+    switch(input$ethSexSelRatio,
+           "1" = selectInput(
+             "ethSexRatio",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethSexRatio",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group_details)
+           )
+    )
+  })
+  
+  plotBoxplotSex <- eventReactive(c(input$sexSubmit, input$sexRatioSubmit, input$SEX),{
+    if(input$SEX == "analytesSex"){
+      return(plotBoxplotSexAnalytes(
+        input$analyteSex, input$bwSex, input$gaSex, input$ethSexSel, input$ethSex, 
+        input$sexSex, input$tpnSex, input$compareSex
+      ))
+    } else {
+      return(
+        plotBoxplotSexRatio(
+          input$numeratorSex, input$denominatorSex, input$bwSexRatio, input$gaSexRatio, input$ethSexSelRatio, input$ethSexRatio, 
+          input$sexSexRatio, input$tpnSexRatio, input$compareSexRatio
+        )
+      )
+    }
+  })
+  
+  
+  output$boxplotSex <- renderPlot({
+    plotBoxplotSex()
+  })
+  
+  
   
   
   
   ############################
   ## aabc
   
-  # ethnicity selection: major groups or detailed groups (analytes panel)
   output$uiEthAabc <- renderUI({
     switch(input$ethAabcSel,
            "1" = selectInput(
@@ -46,7 +108,6 @@ shinyServer(function(input, output, session) {
   })
   
   
-  # ethnicity selection: major groups or detailed groups (ratio panel)
   output$uiEthAabcRatio <- renderUI({
     switch(input$ethAabcSelRatio,
            "1" = selectInput(
@@ -68,7 +129,6 @@ shinyServer(function(input, output, session) {
   })
   
   
-  # boxplot comparing difference between aabc groups
   plotBoxplotAabc <- eventReactive(c(input$aabcSubmit, input$aabcRatioSubmit, input$AABC),{
     if(input$AABC == "analytesAabc"){
       return(plotBoxplotAabcAnalytes(
@@ -85,7 +145,6 @@ shinyServer(function(input, output, session) {
     }
   })
   
-  # metabolic changes over aabc
   plotTrendplotAabc <- eventReactive(c(input$aabcSubmit, input$aabcRatioSubmit, input$AABC),{
     if(input$AABC == "analytesAabc"){
       return(
@@ -136,7 +195,7 @@ shinyServer(function(input, output, session) {
              multiple = TRUE,
              selected = 1
            )
-        )
+    )
   })
   
   
