@@ -1,3 +1,7 @@
+#plotBoxplotSexAnalytes(df$analyteAabc, df$bwAabc, df$gaAabc, df$ethAabcSel, df$ethAabc, df$sexAabc, df$tpnAabc, df$compareAabc)
+
+
+
 library(ggplot2)
 plotBoxplotSexAnalytes <- function(
   analyteSex, bwSex, gaSex, ethSexSel, ethSex, 
