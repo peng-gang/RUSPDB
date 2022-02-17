@@ -18,7 +18,7 @@ load('data/500KCleanJan0422.RData')
 # meta_data$include <- idx_include
 
 shinyServer(function(input, output, session) {
-  output$uiEthsex <- renderUI({
+  output$uiEthSex <- renderUI({
     switch(input$ethSexSel,
            "1" = selectInput(
              "ethSex",

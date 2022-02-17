@@ -129,10 +129,20 @@ plotBoxplotSexAnalytes <- function(
       dplot$group <- factor(flag_ga[idxSel], levels = c("<=27", "28-36",  "37-38",  "39-40",
                                                         "41", "42", ">=43"))
       label <- "Gestational Age"
-    } else if(compareSex=="5"){
+    } else if(compareSex=="5"&ethSexSel=='1'){
       dplot$group <- factor(ethnicity$eth_state[idxSel], levels = c("Asian", "Black", "Hispanic", "White", 
                                                                     "OtherUnknown"))
       dplot <- dplot[dplot$group != "OtherUnknown",]
+      label <- "Ethnicity"
+    } else if(compareSex=="5"&ethSexSel=='2'){
+      dplot$group <- factor(ethnicity$eth_detail[idxSel], levels = c(
+        "Asian East Indian", "Black", "Cambodian",         
+        "Chinese", "Filipino", "Guamanian",    
+        "Hawaiian", "Hispanic", "Japanese", 
+        "Korean", "Laos", "Middle Eastern", 
+        "Native American", "Other Southeast Asian", "Samoan", 
+        "Vietnamese", "White"  
+      ))
       label <- "Ethnicity"
     } else if(compareSex=="6"){
       dplot$group <- factor(flag_tpn[idxSel], levels = c("NoTPN", "TPN", "NA"))
