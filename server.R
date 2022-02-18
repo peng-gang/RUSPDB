@@ -69,7 +69,7 @@ shinyServer(function(input, output, session) {
       return(
         plotBoxplotSexRatio(
           input$numeratorSex, input$denominatorSex, input$bwSexRatio, input$gaSexRatio, input$ethSexSelRatio, input$ethSexRatio, 
-          input$sexSexRatio, input$tpnSexRatio, input$compareSexRatio
+          input$sexAabcRatio, input$tpnSexRatio, input$compareSexRatio
         )
       )
     }
@@ -171,6 +171,73 @@ shinyServer(function(input, output, session) {
   output$trendplotAabc <- renderPlot({
     plotTrendplotAabc()
   })
+  
+  #####################################################################
+  output$uiEthTPN <- renderUI({
+    switch(input$ethTPNSel,
+           "1" = selectInput(
+             "ethTPN",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethTPN",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group_details)
+           )
+    )
+  })
+  
+  
+  output$uiEthTPNRatio <- renderUI({
+    switch(input$ethTPNSelRatio,
+           "1" = selectInput(
+             "ethTPNRatio",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethTPNRatio",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group_details)
+           )
+    )
+  })
+  
+  plotBoxplotTPN <- eventReactive(c(input$tpnSubmit, input$tpnRatioSubmit, input$TPN),{
+    if(input$TPN == "analytesTPN"){
+      return(plotBoxplotTPNAnalytes(
+        input$analyteTPN, input$bwTPN, input$gaTPN, input$ethTPNSel, input$ethTPN, 
+        input$aabcTPN, input$sexTPN, input$compareTPN
+      ))
+    } else {
+      return(
+        plotBoxplotTPNRatio(
+          input$numeratorTPN, input$denominatorTPN, input$bwTPNRatio, input$gaTPNRatio, input$ethTPNSelRatio, input$ethTPNRatio, 
+          input$sexTPNRatio, input$sexTPNRatio, input$compareTPNRatio
+        )
+      )
+    }
+  })
+  
+  
+  output$boxplotTPN <- renderPlot({
+    plotBoxplotTPN()
+  })
+  
+  
+  
+  
   
   
   
