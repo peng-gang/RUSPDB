@@ -96,14 +96,13 @@ shinyUI(
                 uiOutput("uiEthSex")
               ),
               
-              
               tags$div(
-                title = "Select sex to include in the figure",
+                title = "Select Aabc to include in the figure",
                 checkboxGroupInput(
-                  "sexSex",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
+                  "sexAabc",
+                  label = h4("Aabc"),
+                  choices = makeList(aabc_group),
+                  selected = 1:length(aabc_group)
                 )
               ),
               
@@ -122,7 +121,7 @@ shinyUI(
               tags$div(
                 title = "Compare difference between groups within the selected category",
                 radioButtons("compareSex", label = h3("Select comparing groups"),
-                             choices = c(makeList(compare_group)), 
+                             choices = c(makeList(compare_group[compare_group!='Sex'])), 
                              selected = 1)
               ),
               
@@ -218,7 +217,7 @@ shinyUI(
               tags$div(
                 title = "Compare difference between groups within the selected category",
                 radioButtons("compareSexRatio", label = h3("Select comparing groups"),
-                             choices = c(makeList(compare_group)), 
+                             choices = c(makeList(compare_group[compare_group!='Sex'])), 
                              selected = 1)
               ),
               
@@ -323,7 +322,7 @@ shinyUI(
               tags$div(
                 title = "Compare difference between groups within the selected category",
                 radioButtons("compareAabc", label = h3("Select comparing groups"),
-                             choices = c(makeList(compare_group)), 
+                             choices = c(makeList(compare_group[compare_group!='Aabc'])), 
                              selected = 1)
               ),
               
@@ -419,7 +418,7 @@ shinyUI(
               tags$div(
                 title = "Compare difference between groups within the selected category",
                 radioButtons("compareAabcRatio", label = h3("Select comparing groups"),
-                             choices = c(makeList(compare_group)), 
+                             choices = c(makeList(compare_group[compare_group!='Aabc'])), 
                              selected = 1)
               ),
               

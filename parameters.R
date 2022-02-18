@@ -1,5 +1,4 @@
 # parameters
-
 aabc_group <- c("12-23", "24-48", "49-72", "73-168")
 sex_group <- c("Male", "Female")
 bw_group <- c("1000-2499", "2500-3000", "3001-3500", "3501-4000", "4001-5000")
@@ -14,7 +13,7 @@ ethnicity_group_details <- c(
   "Vietnamese", "White"  
 )
 tpn_group <- c("NoTPN", "TPN")
-compare_group <- c("No Comparison", "Sex", "Birth Weight", "Gestational Age", "Ethnicity", "TPN")
+compare_group <- c("No Comparison", "Aabc", "Sex", "Birth Weight", "Gestational Age", "Ethnicity", "TPN")
 
 # range of birth weight, newborns with birth weight less than 1000g or more than 5000g are not included in the analysis
 bw_range <- c(1000, 5000)

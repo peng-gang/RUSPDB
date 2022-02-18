@@ -1,11 +1,19 @@
-#plotBoxplotSexAnalytes(df$analyteAabc, df$bwAabc, df$gaAabc, df$ethAabcSel, df$ethAabc, df$sexAabc, df$tpnAabc, df$compareAabc)
 
-
+df <- list()
+df$analyteSex <- c('10')
+df$bwSex <- c('1','2','3')
+df$gaSex <- c('1')
+df$ethSexSel <- c('2')
+df$ethSex <- c('1','2','3','4')
+df$aabcSex <- c('1','2')
+df$tpnSex <- c('1')
+df$compareSex <- c('1')
+plotBoxplotSexAnalytes(df$analyteSex, df$bwSex, df$gaSex, df$ethSexSel, df$ethSex, df$aabcSex, df$tpnSex, df$compareSex)
 
 library(ggplot2)
 plotBoxplotSexAnalytes <- function(
   analyteSex, bwSex, gaSex, ethSexSel, ethSex, 
-  sexSex, tpnSex, compareSex){
+  aabcSex,tpnSex,compareSex){
   
   if(is.null(ethSex)){
     ethSex == "1"
@@ -42,7 +50,7 @@ plotBoxplotSexAnalytes <- function(
   idxBW <- rep(TRUE, nrow(meta_data))
   idxGA <- rep(TRUE, nrow(meta_data))
   idxEth <- rep(TRUE, nrow(meta_data))
-  idxSex <- rep(TRUE, nrow(meta_data))
+  idxAabc <- rep(TRUE, nrow(meta_data))
   idxTPN <- rep(TRUE, nrow(meta_data))
   
   if(length(bwSex) > 0){
@@ -64,8 +72,8 @@ plotBoxplotSexAnalytes <- function(
   }
   
   
-  if(length(sexSex) == 1){
-    idxSex <- flag_sex %in% sex_group[as.integer(sexSex)]
+  if(length(aabcSex) == 1){
+    idxAabc <- flag_aabc %in% aabc_group[as.integer(aabcSex)]
   }
   
   
@@ -74,7 +82,9 @@ plotBoxplotSexAnalytes <- function(
   }
   
   
-  idxSel <- idx_include & idxBW & idxGA & idxEth & idxSex & idxTPN
+  idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxTPN & flag_sex[rep(TRUE, nrow(meta_data))]!='NA'
+  
+  
   
   if(sum(idxSel) == 0){
     gp <- ggplot(data.frame(x=0.5, y=0.5, label = "No newborn was selected")) + 
@@ -99,7 +109,6 @@ plotBoxplotSexAnalytes <- function(
     stringsAsFactors = FALSE
   )
   #print(summary(dplot))
-  
   if(compareSex=="1"){
     xTicks <- NULL
     for(a in sex_group){
@@ -108,9 +117,9 @@ plotBoxplotSexAnalytes <- function(
         xTicks <- c(xTicks, paste0(a, "\n(n=", num, ")"))
       }
     }
-    
+  
     gp <- ggplot(dplot) + geom_boxplot(aes(x=sex, y = x)) + 
-      geom_hline(yintercept = median(dplot$x[dplot$sex == "24-48"]), color = "#E18727FF") + 
+      #geom_hline(yintercept = median(dplot$x[dplot$sex == "Female"]), color = "#E18727FF") + 
       labs(x="Sex", y = metaName) + 
       scale_x_discrete(labels = xTicks) + 
       theme_light() + theme(text = element_text(size = 12))
@@ -118,9 +127,9 @@ plotBoxplotSexAnalytes <- function(
     return(gp)
   } else {
     if(compareSex=="2"){
-      dplot$group <- factor(flag_sex[idxSel], levels = c("Male", "Female", "NA"))
-      dplot <- dplot[dplot$group != "NA",]
-      label <- "Sex"
+      dplot$group <- factor(flag_aabc[idxSel], levels = c("12-23", "24-48", "49-72", "73-168"))
+      #dplot <- dplot[dplot$group != "NA",]
+      label <- "Aabc"
     } else if(compareSex=="3"){
       dplot$group <- factor(flag_bw[idxSel], levels = c("<1000", "1000-2499", "2500-3000", "3001-3500", "3501-4000",
                                                         "4001-5000", ">5000"))

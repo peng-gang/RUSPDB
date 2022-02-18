@@ -1,7 +1,8 @@
 library(ggplot2)
 
-## functions for AABC panel
 
+## functions for AABC panel
+c
 # boxplot of metabolits between aabc groups
 plotBoxplotAabcAnalytes <- function(
   analyteAabc, bwAabc, gaAabc, ethAabcSel, ethAabc, 
