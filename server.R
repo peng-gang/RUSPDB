@@ -18,6 +18,56 @@ load('data/500KCleanJan0422.RData')
 # meta_data$include <- idx_include
 
 shinyServer(function(input, output, session) {
+  
+  ############################
+  ## Ethnicity
+  
+  plotBoxplotEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ENTHNICITY),{
+    if(input$ENTHNICITY == "analytesEth"){
+      return(plotBoxplotEthAnalytes(
+        input$analyteEth, input$bwEth, input$gaEth, input$ethEthSel, 
+        input$sexEth, input$aabcEth, input$tpnEth, input$compareEth
+      ))
+    } else {
+      return(
+        plotBoxplotEthRatio(
+          input$numeratorEth, input$denominatorEth, input$bwEthRatio, input$gaEthRatio, input$ethEthSelRatio, 
+          input$sexEthRatio, input$aabcEthRatio, input$tpnEthRatio, input$compareEthRatio
+        )
+      )
+    }
+  })
+  
+  
+  output$boxplotEth <- renderPlot({
+    plotBoxplotEth()
+  })
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  ############################
+  ## Sex
+  
+  
+  
+  
+  
+  
+  
+  
+  
   output$uiEthSex <- renderUI({
     switch(input$ethSexSel,
            "1" = selectInput(

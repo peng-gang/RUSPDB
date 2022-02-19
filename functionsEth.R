@@ -126,19 +126,19 @@ plotBoxplotEthAnalytes <- function(
       dplot$group <- factor(flag_aabc[idxSel], levels = c("12-23", "24-48", "49-72", "73-168"))
       #dplot <- dplot[dplot$group != "NA",]
       label <- "Aabc"
-    } else if(compareEth=="3"){
+    } else if(compareEth=="4"){
       dplot$group <- factor(flag_bw[idxSel], levels = c("<1000", "1000-2499", "2500-3000", "3001-3500", "3501-4000",
                                                         "4001-5000", ">5000"))
       label <- "Birth Weight"
-    } else if(compareEth=="4"){
+    } else if(compareEth=="5"){
       dplot$group <- factor(flag_ga[idxSel], levels = c("<=27", "28-36",  "37-38",  "39-40",
                                                         "41", "42", ">=43"))
       label <- "Gestational Age"
-    } else if(compareEth=="5"){
+    } else if(compareEth=="6"){
       dplot$group <- factor(flag_tpn[idxSel], levels = c("NoTPN", "TPN", "NA"))
       dplot <- dplot[dplot$group != "NA",]
       label <- "TPN"
-    } else if(compareEth=="6"){
+    } else if(compareEth=="3"){
       dplot$group <- factor(flag_sex[idxSel], levels = c("Male", "Female", "NA"))
       dplot <- dplot[dplot$group != "NA",]
       label <- "Sex"
@@ -348,19 +348,19 @@ plotBoxplotEthRatio <- function(
       dplot$group <- factor(flag_aabc[idxSel], levels = c("12-23", "24-48", "49-72", "73-168"))
       #dplot <- dplot[dplot$group != "NA",]
       label <- "Aabc"
-    } else if(compareEth=="3"){
+    } else if(compareEth=="4"){
       dplot$group <- factor(flag_bw[idxSel], levels = c("<1000", "1000-2499", "2500-3000", "3001-3500", "3501-4000",
                                                         "4001-5000", ">5000"))
       label <- "Birth Weight"
-    } else if(compareEth=="4"){
+    } else if(compareEth=="5"){
       dplot$group <- factor(flag_ga[idxSel], levels = c("<=27", "28-36",  "37-38",  "39-40",
                                                         "41", "42", ">=43"))
       label <- "Gestational Age"
-    } else if(compareEth=="5"){
+    } else if(compareEth=="6"){
       dplot$group <- factor(flag_tpn[idxSel], levels = c("NoTPN", "TPN", "NA"))
       dplot <- dplot[dplot$group != "NA",]
       label <- "TPN"
-    } else if(compareEth=="6"){
+    } else if(compareEth=="3"){
       dplot$group <- factor(flag_sex[idxSel], levels = c("Male", "Female", "NA"))
       dplot <- dplot[dplot$group != "NA",]
       label <- "Sex"
