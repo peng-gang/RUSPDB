@@ -57,7 +57,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethEthSel",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 )
@@ -85,8 +85,6 @@ shinyUI(
                   selected = 2:4
                 )
               ),
-              
-              hr(),
               
               tags$div(
                 title = "Select Aabc to include in the figure",
@@ -163,7 +161,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethEthSelRatio",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 )
@@ -285,13 +283,11 @@ shinyUI(
                 )
               ),
               
-              hr(),
-              
               tags$div(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethSexSel",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -386,7 +382,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethSexSelRatio",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -495,14 +491,13 @@ shinyUI(
                   selected = 2:4
                 )
               ),
-              
-              hr(),
+            
               
               tags$div(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethAabcSel",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -598,7 +593,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethAabcSelRatio",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -705,7 +700,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethTPNSel",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -794,13 +789,11 @@ shinyUI(
                 )
               ),
               
-              hr(),
-              
               tags$div(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethTPNSelRatio",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -922,7 +915,7 @@ shinyUI(
                 title = "Select a ethnicity group to compare",
                 radioButtons(
                   "ethMCSel",
-                  label = NULL,
+                  label = h4("Race/Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
