@@ -1,6 +1,6 @@
 library(shiny)
 library(markdown)
-library(plotly)
+#library(plotly)
 #library(shinybusy)
 library(shinythemes)
 
@@ -12,22 +12,179 @@ shinyUI(
     "RUSPDB",
     theme = shinytheme("superhero"),
     
-    ####### 
-    ## about
+
+    ############ about ###########
     tabPanel(
       "About"
     ),
     
     
-    #######
-    ## gestational age and birth weight
+    ############ gestational age and birth weight ###############
     
     tabPanel(
-      "GA and BW"
+      "GA and BW",
+      sidebarLayout(
+        sidebarPanel(
+          width = sidebarWidth,
+          tabsetPanel(
+            type = "tabs",
+            id = "GABW",
+            tabPanel(
+              "Analyte(s)",
+              value = "analytesGABW",
+              tags$div(
+                title = "Select one or multiple analytes",
+                selectInput(
+                  "analyteGABW",
+                  label = h4("Analyte"),
+                  choices = makeList(analytes_all),
+                  multiple = TRUE,
+                  selected = which(analytes_all=="C3")
+                )
+              ),
+              
+              hr(),
+              
+              tags$div(
+                title = "Select a ethnicity group(s) to include in the figure",
+                radioButtons(
+                  "ethGABWSel",
+                  label = h4("Race/Enthnicity"),
+                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  selected = 1
+                ),
+                
+                uiOutput("uiEthGABW")
+              ),
+              
+              
+              tags$div(
+                title = "Select Aabc to include in the figure",
+                checkboxGroupInput(
+                  "aabcGABW",
+                  label = h4("Aabc"),
+                  choices = makeList(aabc_group),
+                  selected = 2
+                )
+              ),
+              
+              tags$div(
+                title = "Select TPN status to include in the figure",
+                checkboxGroupInput(
+                  "tpnGABW",
+                  label = h4("TPN"),
+                  choices = makeList(tpn_group),
+                  selected = 1
+                )
+              ),
+              
+              tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexGABW",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
+              
+              
+              hr(),
+              
+              actionButton("GABWSubmit", "Submit")
+            ),
+            
+            
+            tabPanel(
+              "Ratios",
+              value = "ratioGABW",
+              
+              tags$div(
+                title = "Select numerator and denominator for the ratio. If multiple analytes are selected in numerator or denominator, they will be added",
+                selectInput(
+                  "numeratorGABW",
+                  label = h4("Numerator"),
+                  choices = makeList(analytes_all),
+                  multiple = TRUE,
+                  selected = which(analytes_all=="C3")
+                ),
+                
+                selectInput(
+                  "denominatorGABW",
+                  label = h4("Denominator"),
+                  choices = makeList(analytes_all),
+                  multiple = TRUE,
+                  selected = which(analytes_all=="C2")
+                )
+              ),
+              
+              hr(),
+              
+              
+              tags$div(
+                title = "Select a ethnicity group(s) to include in the figure",
+                radioButtons(
+                  "ethGABWSelRatio",
+                  label = h4("Race/Enthnicity"),
+                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  selected = 1
+                ),
+                
+                uiOutput("uiEthGABWRatio")
+              ),
+              
+              
+              hr(),
+              
+              
+              tags$div(
+                title = "Select Aabc to include in the figure",
+                checkboxGroupInput(
+                  "aabcGABWRatio",
+                  label = h4("Aabc"),
+                  choices = makeList(aabc_group),
+                  selected = 2
+                )
+              ),
+              
+              tags$div(
+                title = "Select TPN status to include in the figure",
+                checkboxGroupInput(
+                  "tpnGABWRatio",
+                  label = h4("TPN"),
+                  choices = makeList(tpn_group),
+                  selected = 1
+                )
+              ),
+              
+              
+              tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexGABWRatio",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
+              
+              hr(),
+              
+              
+              actionButton("GABWRatioSubmit", "Submit")
+            )
+            
+          )
+        ),
+        
+        mainPanel(
+          plotOutput("heatGABW")
+        )
+      )
     ),
     
-    ######
-    ## ethnicity
+    
+    ################# ethnicity  #######################
     
     tabPanel(
       "Ethnicity",
@@ -235,7 +392,7 @@ shinyUI(
         )
       )
     ),
-    #########################################################
+
     ####################### sex #############################
     
     tabPanel(
