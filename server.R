@@ -19,8 +19,75 @@ load('data/500KCleanJan0422.RData')
 
 shinyServer(function(input, output, session) {
   
-  ############################
-  ## Ethnicity
+  ########### GABW ###########
+  output$uiEthGABW <- renderUI({
+    switch(input$ethGABWSel,
+           "1" = selectInput(
+             "ethGABW",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethGABW",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group_details)
+           )
+    )
+  })
+  
+  
+  output$uiEthGABWRatio <- renderUI({
+    switch(input$ethGABWSelRatio,
+           "1" = selectInput(
+             "ethGABWRatio",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethGABWRatio",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group_details)
+           )
+    )
+  })
+  
+  
+  plotHeatGABW <- eventReactive(c(input$GABWSubmit, input$GABWRatioSubmit, input$GABW), {
+    if(input$GABW == "analytesGABW"){
+      return(
+        plotHeatBWGAAnalytes(
+          input$analyteGABW, input$ethGABWSel, input$ethGABW, 
+          input$sexGABW, input$aabcGABW, input$tpnGABW
+        )
+      )
+    } else {
+      return(
+        plotHeatBWGARatio(
+          input$numeratorGABW, input$denominatorGABW, input$ethGABWSelRatio, input$ethGABWRatio,
+          input$sexGABWRatio, input$aabcGABWRatio, input$tpnGABWRatio
+        )
+      )
+    }
+  })
+  
+  
+  output$heatGABW <- renderPlot({
+    plotHeatGABW()
+  })
+  
+  
+  
+  ########### Ethnicity #############
   
   plotBoxplotEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ENTHNICITY),{
     if(input$ENTHNICITY == "analytesEth"){
@@ -45,29 +112,10 @@ shinyServer(function(input, output, session) {
   
   
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  ############################
-  ## Sex
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+  ############## Sex ############
+
   output$uiEthSex <- renderUI({
     switch(input$ethSexSel,
            "1" = selectInput(
@@ -133,9 +181,8 @@ shinyServer(function(input, output, session) {
   
   
   
-  
-  ############################
-  ## aabc
+
+  ############## aabc #############
   
   output$uiEthAabc <- renderUI({
     switch(input$ethAabcSel,
@@ -222,7 +269,7 @@ shinyServer(function(input, output, session) {
     plotTrendplotAabc()
   })
   
-  #####################################################################
+  #################### TPN #######################################
   output$uiEthTPN <- renderUI({
     switch(input$ethTPNSel,
            "1" = selectInput(
@@ -287,12 +334,7 @@ shinyServer(function(input, output, session) {
   
   
   
-  
-  
-  
-  
-  ############################
-  ##  Multiple Comparison
+  ############ Multiple Comparison ###########
   
   #ethnicity selection: major groups or detailed groups (analytes panel)
   output$uiEthMC <- renderUI({
