@@ -298,7 +298,7 @@ shinyUI(
               tags$div(
                 title = "Select Aabc to include in the figure",
                 checkboxGroupInput(
-                  "sexAabc",
+                  "aabcSex",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
                   selected = 1:length(aabc_group)

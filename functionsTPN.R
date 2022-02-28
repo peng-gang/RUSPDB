@@ -65,7 +65,7 @@ plotBoxplotTPNAnalytes <- function(
   }
   
   
-  if(length(aabcTPN) == 1){
+  if(length(aabcTPN) > 0){
     idxAabc <- flag_aabc %in% aabc_group[as.integer(aabcTPN)]
   }
   
@@ -266,7 +266,7 @@ plotBoxplotTPNRatio <- function(
   }
   
   
-  if(length(aabcTPN) == 1){
+  if(length(aabcTPN) > 0){
     idxAabc <- flag_aabc %in% aabc_group[as.integer(aabcTPN)]
   }
   

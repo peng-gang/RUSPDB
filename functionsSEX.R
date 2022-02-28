@@ -65,7 +65,7 @@ plotBoxplotSexAnalytes <- function(
   }
   
   
-  if(length(aabcSex) == 1){
+  if(length(aabcSex) >0){
     idxAabc <- flag_aabc %in% aabc_group[as.integer(aabcSex)]
   }
   
@@ -266,7 +266,7 @@ plotBoxplotSexRatio <- function(
   }
   
   
-  if(length(aabcSex) == 1){
+  if(length(aabcSex) > 0){
     idxAabc <- flag_aabc %in% aabc_group[as.integer(aabcSex)]
   }
   

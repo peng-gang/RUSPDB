@@ -113,7 +113,7 @@ shinyServer(function(input, output, session) {
     if(input$SEX == "analytesSex"){
       return(plotBoxplotSexAnalytes(
         input$analyteSex, input$bwSex, input$gaSex, input$ethSexSel, input$ethSex, 
-        input$sexAabc, input$tpnSex, input$compareSex
+        input$aabcSex, input$tpnSex, input$compareSex
       ))
     } else {
       return(
