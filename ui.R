@@ -91,6 +91,13 @@ shinyUI(
               
               hr(),
               
+              tags$div(
+                title = "Select to show trending plot (it will take about 2 mins)",
+                checkboxInput("trendGABWSel", label = "Show trending plot", value = FALSE)
+              ),
+              
+              hr(),
+              
               actionButton("GABWSubmit", "Submit")
             ),
             
@@ -170,6 +177,13 @@ shinyUI(
               
               hr(),
               
+              tags$div(
+                title = "Select to show trending plot (it will take about 2 mins)",
+                checkboxInput("trendGABWSelRatio", label = "Show trending plot", value = FALSE)
+              ),
+              
+              hr(),
+              
               
               actionButton("GABWRatioSubmit", "Submit")
             )
@@ -178,7 +192,9 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("heatGABW")
+          plotOutput("heatGABW"),
+          hr(),
+          plotOutput("trendGABW")
         )
       )
     ),
@@ -602,8 +618,8 @@ shinyUI(
       )
     ),
     
-    ####### 
-    ## aabc
+
+    ############ aabc ############
     tabPanel(
       "Age at blood collection",
       sidebarLayout(
@@ -690,6 +706,13 @@ shinyUI(
                 radioButtons("compareAabc", label = h3("Select comparing groups"),
                              choices = c(makeList(compare_group[compare_group!='Aabc'])), 
                              selected = 1)
+              ),
+              
+              hr(),
+              
+              tags$div(
+                title = "Select to show trending plot (it will take about 2 mins)",
+                checkboxInput("trendAabcSel", label = "Show trending plot", value = FALSE)
               ),
               
               hr(),
@@ -790,6 +813,13 @@ shinyUI(
               
               hr(),
               
+              tags$div(
+                title = "Select to show trending plot (it will take about 2 mins)",
+                checkboxInput("trendAabcRatioSel", label = "Show trending plot", value = FALSE)
+              ),
+              
+              hr(),
+              
               actionButton("aabcRatioSubmit", "Submit")
             )
             
@@ -804,8 +834,8 @@ shinyUI(
       )
     ),
     
-    ####################################################
-    ################################ TPN
+
+    ################# TPN ##############
     tabPanel(
       "TPN",
       sidebarLayout(
@@ -1003,19 +1033,8 @@ shinyUI(
     ),
     
       
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-    ####### 
-    # multiple comparison
+    
+    #### multiple comparison ####
     tabPanel(
       "Multiple Comparison",
       sidebarLayout(
@@ -1229,8 +1248,5 @@ shinyUI(
         )
       )
     )
-    
-    
-    ######
   )
 )
