@@ -99,6 +99,7 @@ plotHeatGABWAnalytes <- function(
   
   #anaGA <- columnAnnotation(l1 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "row"))
   #anaBW <- rowAnnotation(l2 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "column"))
+  f1 = colorRamp2(seq(min(dplot), max(dplot), length = 3), c("blue", "white", "red"),transparency = 0.2)
   
   ht <- Heatmap(
     dplot,
@@ -113,10 +114,25 @@ plotHeatGABWAnalytes <- function(
     column_title_gp = gpar(fontsize = 14), 
     row_title_gp = gpar(fontsize = 14),
     
+    col = f1,
+    column_names_rot = 45,
+    rect_gp = gpar(col = "white", lwd = 2),
+    width = ncol(dplot)*unit(2, "cm"),
+    height = nrow(dplot)*unit(2, "cm"),
     
     cell_fun = function(j, i, x, y, width, height, fill){
       grid.text(paste0(sprintf("%.2f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
-    }
+    },
+    heatmap_legend_param = list(title = "Analyte Value", 
+                                title_gp = gpar(fontsize = 10), 
+                                labels_gp = gpar(fontsize = 10), 
+                                color_bar='continous',
+                                #labels = c("low", "zero", "high"),
+                                direction = "vertical",
+                                at = seq(min(dplot),max(dplot),round((max(dplot)-min(dplot))/5,3)),
+                                legend_height = unit(8, "cm"),
+                                legend_width = unit(8, "cm")
+    )
     
     #top_annotation = anaGA,
     #right_annotation = anaBW
@@ -264,6 +280,7 @@ plotHeatGABWRatio <- function(
   
   #anaGA <- columnAnnotation(l1 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "row"))
   #anaBW <- rowAnnotation(l2 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "column"))
+  f1 = colorRamp2(seq(min(dplot), max(dplot), length = 3), c("blue", "white", "red"),transparency = 0.2)
   
   ht <- Heatmap(
     dplot,
@@ -275,9 +292,14 @@ plotHeatGABWRatio <- function(
     row_title = "Birth Weight (g)",
     column_title_side = "bottom",
     row_names_side = "left",
+    
+    col = f1,
     column_title_gp = gpar(fontsize = 14), 
     row_title_gp = gpar(fontsize = 14),
-    
+    column_names_rot = 45,
+    rect_gp = gpar(col = "white", lwd = 2),
+    width = ncol(dplot)*unit(2, "cm"),
+    height = nrow(dplot)*unit(2, "cm"),
     
     cell_fun = function(j, i, x, y, width, height, fill){
       if(median(dplot)>0.1){
@@ -289,7 +311,17 @@ plotHeatGABWRatio <- function(
       } else {
         grid.text(paste0(sprintf("%.2e", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
       }
-    }
+    },
+    heatmap_legend_param = list(title = "Analyte Value", 
+                                title_gp = gpar(fontsize = 10), 
+                                labels_gp = gpar(fontsize = 10), 
+                                color_bar='continous',
+                                #labels = c("low", "zero", "high"),
+                                direction = "vertical",
+                                at = seq(min(dplot),max(dplot),0.01),
+                                legend_height = unit(8, "cm"),
+                                legend_width = unit(8, "cm")
+    )
     
     #top_annotation = anaGA,
     #right_annotation = anaBW
