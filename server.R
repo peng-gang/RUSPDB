@@ -1,5 +1,5 @@
 library(shiny)
-library(plotly)
+#library(plotly)
 #library(shinybusy)
 
 load('data/500KCleanJan0422.RData')
@@ -83,7 +83,7 @@ shinyServer(function(input, output, session) {
   plotTrendGABW <- eventReactive(c(input$GABWSubmit, input$GABWRatioSubmit, input$GABW), {
     if(input$GABW == "analytesGABW"){
       if(!input$trendGABWSel){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes")) + 
+        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
           geom_text(aes(x=x, y=y, label=label)) + 
           scale_x_continuous(limits = c(0,1)) + 
           scale_y_continuous(limits = c(0,1)) + 
@@ -98,7 +98,7 @@ shinyServer(function(input, output, session) {
       )
     } else {
       if(!input$trendGABWSelRatio){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes")) + 
+        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
           geom_text(aes(x=x, y=y, label=label)) + 
           scale_x_continuous(limits = c(0,1)) + 
           scale_y_continuous(limits = c(0,1)) + 
@@ -283,7 +283,7 @@ shinyServer(function(input, output, session) {
   plotTrendplotAabc <- eventReactive(c(input$aabcSubmit, input$aabcRatioSubmit, input$AABC),{
     if(input$AABC == "analytesAabc"){
       if(!input$trendAabcSel){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes")) + 
+        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
           geom_text(aes(x=x, y=y, label=label)) + 
           scale_x_continuous(limits = c(0,1)) + 
           scale_y_continuous(limits = c(0,1)) + 
@@ -298,7 +298,7 @@ shinyServer(function(input, output, session) {
       )
     } else {
       if(!input$trendAabcRatioSel){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes")) + 
+        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
           geom_text(aes(x=x, y=y, label=label)) + 
           scale_x_continuous(limits = c(0,1)) + 
           scale_y_continuous(limits = c(0,1)) + 
@@ -398,7 +398,7 @@ shinyServer(function(input, output, session) {
              label = h4("Major Ethnicity Groups"),
              choices = makeList(ethnicity_group),
              multiple = TRUE,
-             selected = 1
+             selected = 3
            ),
            
            "2" = selectInput(
@@ -420,7 +420,7 @@ shinyServer(function(input, output, session) {
              label = h4("Major Ethnicity Groups"),
              choices = makeList(ethnicity_group),
              multiple = TRUE,
-             selected = 1
+             selected = 3
            ),
            
            "2" = selectInput(

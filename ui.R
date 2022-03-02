@@ -16,7 +16,7 @@ shinyUI(
     ############ about ###########
     tabPanel(
       "About",
-      includeMarkdown("content/About.md")
+      includeMarkdown("content/about.md")
     ),
     
     
@@ -65,7 +65,7 @@ shinyUI(
                   "aabcGABW",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 2
+                  selected = 1:2
                 )
               ),
               
@@ -151,7 +151,7 @@ shinyUI(
                   "aabcGABWRatio",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 2
+                  selected = 1:2
                 )
               ),
               
@@ -266,7 +266,7 @@ shinyUI(
                   "aabcEth",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:length(aabc_group)
+                  selected = 1:2
                 )
               ),
               
@@ -373,7 +373,7 @@ shinyUI(
                   "aabcEthRatio",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:length(aabc_group)
+                  selected = 1:2
                 )
               ),
               
@@ -475,7 +475,7 @@ shinyUI(
                   "aabcSex",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:length(aabc_group)
+                  selected = 1:2
                 )
               ),
               
@@ -571,7 +571,7 @@ shinyUI(
                   "aabcSexRatio",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:length(aabc_group)
+                  selected = 1:2
                 )
               ),
               
@@ -1130,7 +1130,7 @@ shinyUI(
                   label = h4("Status of Total Parenteral Nutrition"),
                   choices = makeList(tpn_group),
                   multiple = TRUE,
-                  selected = 1
+                  selected = 2
                 )
               ),
               
@@ -1232,7 +1232,7 @@ shinyUI(
                   label = h4("Status of Total Parenteral Nutrition"),
                   choices = makeList(tpn_group),
                   multiple = TRUE,
-                  selected = 1
+                  selected = 2
                 )
               ),
               
