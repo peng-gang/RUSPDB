@@ -15,7 +15,8 @@ shinyUI(
 
     ############ about ###########
     tabPanel(
-      "About"
+      "About",
+      includeMarkdown("content/About.md")
     ),
     
     
