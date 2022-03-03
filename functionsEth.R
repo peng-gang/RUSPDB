@@ -2,8 +2,12 @@
 library(ggplot2)
 
 plotBoxplotEthAnalytes <- function(
-  analyteEth, bwEth, gaEth, ethEthSel, sexEth, 
+  analyteEth, bwEth, gaEth, ethEthSel, ethEth, sexEth, 
   aabcEth,tpnEth,compareEth){
+  
+  if(is.null(ethEth)){
+    ethEth = c("1", "2", "3", "4")
+  }
 
   if(length(analyteEth) == 0){
     meta <- NULL
@@ -37,7 +41,7 @@ plotBoxplotEthAnalytes <- function(
   idxSex <- rep(TRUE, nrow(meta_data))
   idxAabc <- rep(TRUE, nrow(meta_data))
   idxTPN <- rep(TRUE, nrow(meta_data))
-  idx <- rep(TRUE, nrow(meta_data))
+  #idx <- rep(TRUE, nrow(meta_data))
   
   if(length(bwEth) > 0){
     idxBW <- flag_bw %in% bw_group[as.integer(bwEth)]
@@ -61,13 +65,13 @@ plotBoxplotEthAnalytes <- function(
   }
   
   if (ethEthSel=='1'){
-    idx  <- ethnicity[rep(TRUE, nrow(meta_data)),1]!='OtherUnknown'
+    idxEth  <- ethnicity$eth_state %in% ethnicity_group[as.integer(ethEth)]
   }
   else{
-    idx  <- ethnicity[rep(TRUE, nrow(meta_data)),2]!='Other' & ethnicity[rep(TRUE, nrow(meta_data)),3]!=T
+    idxEth  <- ethnicity$eth_detail %in% ethnicity_group_details[as.integer(ethEth)]
   }
   
-  idxSel <- idx_include & idxBW & idxGA & idxSex & idxAabc & idxTPN & idx
+  idxSel <- idx_include & idxBW & idxGA & idxSex & idxAabc & idxTPN & idxEth
   
   
   if(sum(idxSel) == 0){
@@ -185,9 +189,12 @@ plotBoxplotEthAnalytes <- function(
 
 
 plotBoxplotEthRatio <- function(
-  numeratorEth, denominatorEth, bwEth, gaEth, ethEthSel, sexEth, 
+  numeratorEth, denominatorEth, bwEth, gaEth, ethEthSel, ethEth, sexEth, 
   aabcEth, tpnEth, compareEth
 ){
+  if(is.null(ethEth)){
+    ethEth = c("1", "2", "3", "4")
+  }
   
   if(length(numeratorEth) == 0){
     numer <- NULL
@@ -249,7 +256,7 @@ plotBoxplotEthRatio <- function(
   idxSex <- rep(TRUE, nrow(meta_data))
   idxAabc <- rep(TRUE, nrow(meta_data))
   idxTPN <- rep(TRUE, nrow(meta_data))
-  idx <- rep(TRUE, nrow(meta_data))
+  #idx <- rep(TRUE, nrow(meta_data))
   
   if(length(bwEth) > 0){
     idxBW <- flag_bw %in% bw_group[as.integer(bwEth)]
@@ -272,13 +279,13 @@ plotBoxplotEthRatio <- function(
   }
   
   if (ethEthSel=='1'){
-    idx  <- ethnicity[rep(TRUE, nrow(meta_data)),1]!='OtherUnknown'
+    idxEth  <- ethnicity$eth_state %in% ethnicity_group[as.integer(ethEth)]
   }
   else{
-    idx  <- ethnicity[rep(TRUE, nrow(meta_data)),2]!='Other' & ethnicity[rep(TRUE, nrow(meta_data)),3]!=T
+    idxEth  <- ethnicity$eth_detail %in% ethnicity_group_details[as.integer(ethEth)]
   }
   
-  idxSel <- idx_include & idxBW & idxGA & idxSex & idxAabc & idxTPN & idx
+  idxSel <- idx_include & idxBW & idxGA & idxSex & idxAabc & idxTPN & idxEth
   
   if(sum(idxSel) == 0){
     gp <- ggplot(data.frame(x=0.5, y=0.5, label = "No newborn in the selected group")) + 

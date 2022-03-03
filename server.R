@@ -35,7 +35,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })
@@ -56,7 +56,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })
@@ -127,16 +127,56 @@ shinyServer(function(input, output, session) {
   
   ########### Ethnicity #############
   
+  output$uiEthEth <- renderUI({
+    switch(input$ethEthSel,
+           "1" = selectInput(
+             "ethEth",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethEth",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:6
+           )
+    )
+  })
+  
+  output$uiEthEthRatio <- renderUI({
+    switch(input$ethEthSelRatio,
+           "1" = selectInput(
+             "ethEthRatio",
+             label = h4("Major Ethnicity Groups"),
+             choices = makeList(ethnicity_group),
+             multiple = TRUE,
+             selected = 1:length(ethnicity_group)
+           ),
+           
+           "2" = selectInput(
+             "ethEthRatio",
+             label = h4("Detailed Ethnicity Groups"),
+             choices = makeList(ethnicity_group_details),
+             multiple = TRUE,
+             selected = 1:6
+           )
+    )
+  })
+  
   plotBoxplotEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ENTHNICITY),{
     if(input$ENTHNICITY == "analytesEth"){
       return(plotBoxplotEthAnalytes(
-        input$analyteEth, input$bwEth, input$gaEth, input$ethEthSel, 
+        input$analyteEth, input$bwEth, input$gaEth, input$ethEthSel, input$ethEth,
         input$sexEth, input$aabcEth, input$tpnEth, input$compareEth
       ))
     } else {
       return(
         plotBoxplotEthRatio(
-          input$numeratorEth, input$denominatorEth, input$bwEthRatio, input$gaEthRatio, input$ethEthSelRatio, 
+          input$numeratorEth, input$denominatorEth, input$bwEthRatio, input$gaEthRatio, input$ethEthSelRatio, input$ethEthRatio,
           input$sexEthRatio, input$aabcEthRatio, input$tpnEthRatio, input$compareEthRatio
         )
       )
@@ -169,7 +209,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })
@@ -190,7 +230,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })
@@ -237,7 +277,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })
@@ -258,7 +298,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })
@@ -339,7 +379,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })
@@ -360,7 +400,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:6
+             selected = 1:length(ethnicity_group_details)
            )
     )
   })

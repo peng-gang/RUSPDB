@@ -234,9 +234,9 @@ shinyUI(
                   label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
-                )
+                ),
                 
-                #uiOutput("uiEthEth")
+                uiOutput("uiEthEth")
               ),
               
               
@@ -338,9 +338,9 @@ shinyUI(
                   label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
-                )
+                ),
                 
-                #uiOutput("uiEthEthRatio")
+                uiOutput("uiEthEthRatio")
               ),
               
               
