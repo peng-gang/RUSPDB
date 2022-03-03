@@ -35,7 +35,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })
@@ -56,7 +56,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })
@@ -169,7 +169,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })
@@ -190,7 +190,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })
@@ -237,7 +237,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })
@@ -258,7 +258,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })
@@ -339,7 +339,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })
@@ -360,7 +360,7 @@ shinyServer(function(input, output, session) {
              label = h4("Detailed Ethnicity Groups"),
              choices = makeList(ethnicity_group_details),
              multiple = TRUE,
-             selected = 1:length(ethnicity_group_details)
+             selected = 1:6
            )
     )
   })

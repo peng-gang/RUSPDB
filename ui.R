@@ -231,7 +231,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethEthSel",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 )
@@ -335,7 +335,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethEthSelRatio",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 )
