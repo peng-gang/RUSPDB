@@ -9,7 +9,7 @@ plotBoxplotTPNAnalytes <- function(
   aabcTPN,sexTPN,compareTPN){
   
   if(is.null(ethTPN)){
-    ethTPN == "1"
+    ethTPN = c("1", "2", "3", "4")
   }
   
   
@@ -181,7 +181,7 @@ plotBoxplotTPNRatio <- function(
   aabcTPN, sexTPN, compareTPN
 ){
   if(is.null(ethTPN)){
-    ethTPN == "1"
+    ethTPN = c("1", "2", "3", "4")
   }
   
   if(length(numeratorTPN) == 0){
@@ -272,9 +272,8 @@ plotBoxplotTPNRatio <- function(
   
   
   if(length(sexTPN) == 1){
-    idxSex <- flag_sex %in% tpn_group[as.integer(sexTPN)]
+    idxSex <- flag_sex %in% sex_group[as.integer(sexTPN)]
   }
-  
   
   idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxSex & flag_tpn[rep(TRUE, nrow(meta_data))]!='NA'
   

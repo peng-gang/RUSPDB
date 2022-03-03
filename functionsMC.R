@@ -28,7 +28,7 @@ plotMCAnalytes <- function(
   # print(tpnMC)
   
   if(is.null(ethMC)){
-    ethMC == "1"
+    ethMC = "2"
   }
   
   if(length(analyteMC) == 0){
@@ -172,7 +172,7 @@ plotMCRatio <- function(
   
   
   if(is.null(ethMC)){
-    ethMC == "1"
+    ethMC = "3"
   }
   
   if(length(numeratorMC) == 0){
@@ -336,7 +336,7 @@ getMCInfoAnalytes <- function(
   analyteMC, bwMC, gaMC, ethMCSel, ethMC, 
   aabcMC, sexMC, tpnMC){
   if(is.null(ethMC)){
-    ethMC == "1"
+    ethMC = "2"
   }
   
   if(length(analyteMC) == 0){
@@ -531,7 +531,7 @@ getMCInfoRatio <- function(
   aabcMC, sexMC, tpnMC){
   
   if(is.null(ethMC)){
-    ethMC == "1"
+    ethMC = "3"
   }
   
   if(length(numeratorMC) == 0){

@@ -9,7 +9,7 @@ plotBoxplotSexAnalytes <- function(
   aabcSex,tpnSex,compareSex){
   
   if(is.null(ethSex)){
-    ethSex == "1"
+    ethSex = c("1", "2", "3", "4")
   }
   
   
@@ -181,7 +181,7 @@ plotBoxplotSexRatio <- function(
   aabcSex, tpnSex, compareSex
 ){
   if(is.null(ethSex)){
-    ethSex == "1"
+    ethSex = c("1", "2", "3", "4")
   }
   
   if(length(numeratorSex) == 0){

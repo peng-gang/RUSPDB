@@ -1067,7 +1067,7 @@ shinyUI(
                   label = h4("Birth Weight (g)"),
                   choices = makeList(bw_group),
                   multiple = TRUE,
-                  selected = 1
+                  selected = 4
                 )
               ),
               
@@ -1080,7 +1080,7 @@ shinyUI(
                   label = h4("Gestational Age (week)"),
                   choices = makeList(ga_group),
                   multiple = TRUE,
-                  selected = 1
+                  selected = 3
                 )
               ),
               
@@ -1107,7 +1107,7 @@ shinyUI(
                   label = h4("Age at Blood Collection (hour)"),
                   choices = makeList(aabc_group),
                   multiple = TRUE,
-                  selected = 1
+                  selected = 4
                 )
               ),
               
@@ -1130,7 +1130,7 @@ shinyUI(
                   label = h4("Status of Total Parenteral Nutrition"),
                   choices = makeList(tpn_group),
                   multiple = TRUE,
-                  selected = 2
+                  selected = 1
                 )
               ),
               

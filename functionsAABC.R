@@ -9,7 +9,7 @@ plotBoxplotAabcAnalytes <- function(
   sexAabc, tpnAabc, compareAabc){
   
   if(is.null(ethAabc)){
-    ethAabc == "1"
+    ethAabc = c("1", "2", "3", "4")
   }
   
   
@@ -186,7 +186,7 @@ plotBoxplotAabcRatio <- function(
   sexAabc, tpnAabc, compareAabc
 ){
   if(is.null(ethAabc)){
-    ethAabc == "1"
+    ethAabc = c("1", "2", "3", "4")
   }
   
   if(length(numeratorAabc) == 0){

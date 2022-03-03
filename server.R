@@ -438,7 +438,7 @@ shinyServer(function(input, output, session) {
              label = h4("Major Ethnicity Groups"),
              choices = makeList(ethnicity_group),
              multiple = TRUE,
-             selected = 3
+             selected = 2
            ),
            
            "2" = selectInput(

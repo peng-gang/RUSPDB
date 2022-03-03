@@ -7,7 +7,7 @@ plotHeatGABWAnalytes <- function(
   analyte, ethSel, eth, sex, aabc, tpn){
   
   if(is.null(eth)){
-    eth == "1"
+    eth = c("1", "2", "3", "4")
   }
   
   
@@ -44,7 +44,7 @@ plotHeatGABWAnalytes <- function(
   idxTPN <- rep(TRUE, nrow(meta_data))
   
   if(ethSel == "1"){
-    if(length(eth) > 0 && length(eth) < length(eth)){
+    if(length(eth) > 0 && length(eth) < length(ethnicity_group)){
       idxEth <- ethnicity$eth_state %in% ethnicity_group[as.integer(eth)]
     }
   } else {
@@ -148,7 +148,7 @@ plotHeatGABWRatio <- function(
   numerator, denominator, ethSel, eth, sex, aabc, tpn
 ){
   if(is.null(eth)){
-    eth == "1"
+    eth = c("1", "2", "3", "4")
   }
   
   if(length(numerator) == 0){
@@ -213,7 +213,7 @@ plotHeatGABWRatio <- function(
   idxTPN <- rep(TRUE, nrow(meta_data))
   
   if(ethSel == "1"){
-    if(length(eth) > 0 && length(eth) < length(eth)){
+    if(length(eth) > 0 && length(eth) < length(ethnicity_group)){
       idxEth <- ethnicity$eth_state %in% ethnicity_group[as.integer(eth)]
     }
   } else {
@@ -221,6 +221,9 @@ plotHeatGABWRatio <- function(
       idxEth <- ethnicity$eth_detail %in% ethnicity_group_details[as.integer(eth)]
     }
   }
+  
+  #print(eth)
+  #print(sum(idxEth))
   
   if(length(sex) == 1){
     idxSex <- flag_sex %in% sex_group[as.integer(sex)]
@@ -569,51 +572,30 @@ plotTrendGABWRatio <- function(
   
   ratio <- x/y
   
-  dplot <- matrix(0, nrow = 5, ncol = 5)
-  sampleSize <- matrix(0, nrow = 5, ncol = 5)
-  for(i in 1:5){
-    for(j in 1:5){
-      dplot[i,j] <- median(ratio[idxSel & (flag_ga %in% ga_group[j]) & (flag_bw %in% bw_group[i])])
-      sampleSize[i,j] <- sum(idxSel & (flag_ga %in% ga_group[j]) & (flag_bw %in% bw_group[i]))
-    }
-  }
-  
-  colnames(dplot) <- ga_group
-  rownames(dplot) <- bw_group
-  
-  
-  #anaGA <- columnAnnotation(l1 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "row"))
-  #anaBW <- rowAnnotation(l2 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "column"))
-  
-  ht <- Heatmap(
-    dplot,
-    cluster_rows = FALSE,
-    cluster_columns = FALSE,
-    
-    name = ratioName,
-    column_title = "Gestational Age (week)",
-    row_title = "Birth Weight (g)",
-    column_title_side = "bottom",
-    row_names_side = "left",
-    column_title_gp = gpar(fontsize = 14), 
-    row_title_gp = gpar(fontsize = 14),
-    
-    
-    cell_fun = function(j, i, x, y, width, height, fill){
-      if(median(dplot)>0.1){
-        grid.text(paste0(sprintf("%.2f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
-      } else if (median(dplot)>0.01) {
-        grid.text(paste0(sprintf("%.3f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
-      } else if (median(dplot)>0.001) {
-        grid.text(paste0(sprintf("%.4f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
-      } else {
-        grid.text(paste0(sprintf("%.2e", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
-      }
-    }
-    
-    #top_annotation = anaGA,
-    #right_annotation = anaBW
+  dplot <- data.frame(
+    y = c(ratio[idxSel],ratio[idxSel]),
+    BW = c(birth_weight[idxSel], birth_weight[idxSel]),
+    GA = c(gestational_age[idxSel], gestational_age[idxSel]),
+    BWG = factor(c(rep("All", sum(idxSel)), flag_bw[idxSel]), levels = c("All", bw_group)),
+    GAG = factor(c(rep("All", sum(idxSel)), flag_ga[idxSel]), levels = c("All", ga_group)),
+    stringsAsFactors = FALSE
   )
   
-  return(ht)
+  gpGA <- ggplot(dplot) + 
+    geom_smooth(aes(x=GA, y=y, color=BWG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
+    labs(x="Gestational Age (Week)", y=ratioName) + 
+    scale_color_nejm() + 
+    theme_light() + 
+    theme(legend.title = element_blank(), legend.position = "bottom")
+  
+  gpBW <- ggplot(dplot) + 
+    geom_smooth(aes(x=BW, y=y, color=GAG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
+    labs(x="Birth Weight (g)", y=ratioName) + 
+    scale_color_nejm() + 
+    theme_light() + 
+    theme(legend.title = element_blank(), legend.position = "bottom")
+  
+  
+  gp <- ggarrange(gpGA, gpBW, ncol = 2)
+  gp
 }
