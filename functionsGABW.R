@@ -96,10 +96,12 @@ plotHeatGABWAnalytes <- function(
   colnames(dplot) <- ga_group
   rownames(dplot) <- bw_group
   
-  
+  #print(dplot)
+  #print(min(dplot, na.rm = TRUE))
+  #print(max(dplot, na.rm = TRUE))
   #anaGA <- columnAnnotation(l1 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "row"))
   #anaBW <- rowAnnotation(l2 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "column"))
-  f1 = colorRamp2(seq(min(dplot), max(dplot), length = 3), c("blue", "white", "red"),transparency = 0.2)
+  f1 = colorRamp2(seq(min(dplot, na.rm = TRUE), max(dplot, na.rm = TRUE), length = 3), c("blue", "white", "red"),transparency = 0.2)
   
   ht <- Heatmap(
     dplot,
@@ -129,7 +131,7 @@ plotHeatGABWAnalytes <- function(
                                 color_bar='continous',
                                 #labels = c("low", "zero", "high"),
                                 direction = "vertical",
-                                at = seq(min(dplot),max(dplot),round((max(dplot)-min(dplot))/5,3)),
+                                at = seq(min(dplot, na.rm = TRUE),max(dplot,na.rm = TRUE),round((max(dplot, na.rm = TRUE)-min(dplot, na.rm = TRUE))/5,3)),
                                 legend_height = unit(8, "cm"),
                                 legend_width = unit(8, "cm")
     )
@@ -283,7 +285,7 @@ plotHeatGABWRatio <- function(
   
   #anaGA <- columnAnnotation(l1 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "row"))
   #anaBW <- rowAnnotation(l2 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "column"))
-  f1 = colorRamp2(seq(min(dplot), max(dplot), length = 3), c("blue", "white", "red"),transparency = 0.2)
+  f1 = colorRamp2(seq(min(dplot, na.rm = TRUE), max(dplot, na.rm = TRUE), length = 3), c("blue", "white", "red"),transparency = 0.2)
   
   ht <- Heatmap(
     dplot,
