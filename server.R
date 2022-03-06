@@ -245,7 +245,7 @@ shinyServer(function(input, output, session) {
       return(
         plotBoxplotSexRatio(
           input$numeratorSex, input$denominatorSex, input$bwSexRatio, input$gaSexRatio, input$ethSexSelRatio, input$ethSexRatio, 
-          input$sexAabcRatio, input$tpnSexRatio, input$compareSexRatio
+          input$aabcSexRatio, input$tpnSexRatio, input$compareSexRatio
         )
       )
     }
@@ -415,7 +415,7 @@ shinyServer(function(input, output, session) {
       return(
         plotBoxplotTPNRatio(
           input$numeratorTPN, input$denominatorTPN, input$bwTPNRatio, input$gaTPNRatio, input$ethTPNSelRatio, input$ethTPNRatio, 
-          input$sexTPNRatio, input$sexTPNRatio, input$compareTPNRatio
+          input$aabcTPNRatio, input$sexTPNRatio, input$compareTPNRatio
         )
       )
     }

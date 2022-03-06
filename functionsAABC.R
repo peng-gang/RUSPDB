@@ -1,6 +1,5 @@
 library(ggplot2)
 
-
 ## functions for AABC panel
 
 # boxplot of metabolits between aabc groups
@@ -344,10 +343,20 @@ plotBoxplotAabcRatio <- function(
       dplot$group <- factor(flag_ga[idxSel], levels = c("<=27", "28-36",  "37-38",  "39-40",
                                                         "41", "42", ">=43"))
       label <- "Gestational Age"
-    } else if(compareAabc=="5"){
+    } else if(compareAabc=="5"&ethAabcSel=='1'){
       dplot$group <- factor(ethnicity$eth_state[idxSel], levels = c("Asian", "Black", "Hispanic", "White", 
                                                                     "OtherUnknown"))
       dplot <- dplot[dplot$group != "OtherUnknown",]
+      label <- "Ethnicity"
+    } else if(compareAabc=="5"&ethAabcSel=='2'){
+      dplot$group <- factor(ethnicity$eth_detail[idxSel], levels = c(
+        "Asian East Indian", "Black", "Cambodian",         
+        "Chinese", "Filipino", "Guamanian",    
+        "Hawaiian", "Hispanic", "Japanese", 
+        "Korean", "Laos", "Middle Eastern", 
+        "Native American", "Other Southeast Asian", "Samoan", 
+        "Vietnamese", "White"  
+      ))
       label <- "Ethnicity"
     } else if(compareAabc=="6"){
       dplot$group <- factor(flag_tpn[idxSel], levels = c("NoTPN", "TPN", "NA"))
@@ -694,10 +703,20 @@ plotTrendplotAabcRatio <- function(
       dplot$group <- factor(flag_ga[idxSel], levels = c("<=27", "28-36",  "37-38",  "39-40",
                                                         "41", "42", ">=43"))
       label <- "Gestational Age"
-    } else if(compareAabc=="5"){
+    } else if(compareAabc=="5"&ethAabcSel=='1'){
       dplot$group <- factor(ethnicity$eth_state[idxSel], levels = c("Asian", "Black", "Hispanic", "White", 
                                                                     "OtherUnknown"))
       dplot <- dplot[dplot$group != "OtherUnknown",]
+      label <- "Ethnicity"
+    } else if(compareAabc=="5"&ethAabcSel=='2'){
+      dplot$group <- factor(ethnicity$eth_detail[idxSel], levels = c(
+        "Asian East Indian", "Black", "Cambodian",         
+        "Chinese", "Filipino", "Guamanian",    
+        "Hawaiian", "Hispanic", "Japanese", 
+        "Korean", "Laos", "Middle Eastern", 
+        "Native American", "Other Southeast Asian", "Samoan", 
+        "Vietnamese", "White"  
+      ))
       label <- "Ethnicity"
     } else if(compareAabc=="6"){
       dplot$group <- factor(flag_tpn[idxSel], levels = c("NoTPN", "TPN", "NA"))

@@ -364,7 +364,15 @@ shinyUI(
                 )
               ),
               
-              hr(),
+              tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexEthRatio",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
 
               
               tags$div(
@@ -582,16 +590,6 @@ shinyUI(
                   label = h4("TPN"),
                   choices = makeList(tpn_group),
                   selected = 1
-                )
-              ),
-              
-              tags$div(
-                title = "Select sex to include in the figure",
-                checkboxGroupInput(
-                  "sexEthRatio",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
                 )
               ),
               

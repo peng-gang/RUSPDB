@@ -61,7 +61,7 @@ plotBoxplotEthAnalytes <- function(
   }
   
   if(length(sexEth) == 1){
-    idxSex <- flag_sex %in% tpn_sex[as.integer(sexEth)]
+    idxSex <- flag_sex %in% sex_group[as.integer(sexEth)]
   }
   
   if (ethEthSel=='1'){
@@ -409,7 +409,6 @@ plotBoxplotEthRatio <- function(
     }
   }
 }
-
 
 
   
