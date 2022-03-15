@@ -82,14 +82,14 @@ shinyServer(function(input, output, session) {
   
   plotTrendGABW <- eventReactive(c(input$GABWSubmit, input$GABWRatioSubmit, input$GABW), {
     if(input$GABW == "analytesGABW"){
-      if(!input$trendGABWSel){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
-          geom_text(aes(x=x, y=y, label=label)) + 
-          scale_x_continuous(limits = c(0,1)) + 
-          scale_y_continuous(limits = c(0,1)) + 
-          theme_void() + theme(text = element_text(size = 24))
-        return(gp)
-      }
+      # if(!input$trendGABWSel){
+      #   gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
+      #     geom_text(aes(x=x, y=y, label=label)) + 
+      #     scale_x_continuous(limits = c(0,1)) + 
+      #     scale_y_continuous(limits = c(0,1)) + 
+      #     theme_void() + theme(text = element_text(size = 24))
+      #   return(gp)
+      # }
       return(
         plotTrendGABWAnalytes(
           input$analyteGABW, input$ethGABWSel, input$ethGABW, 
@@ -97,14 +97,14 @@ shinyServer(function(input, output, session) {
         )
       )
     } else {
-      if(!input$trendGABWSelRatio){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
-          geom_text(aes(x=x, y=y, label=label)) + 
-          scale_x_continuous(limits = c(0,1)) + 
-          scale_y_continuous(limits = c(0,1)) + 
-          theme_void() + theme(text = element_text(size = 24))
-        return(gp)
-      }
+      # if(!input$trendGABWSelRatio){
+      #   gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
+      #     geom_text(aes(x=x, y=y, label=label)) + 
+      #     scale_x_continuous(limits = c(0,1)) + 
+      #     scale_y_continuous(limits = c(0,1)) + 
+      #     theme_void() + theme(text = element_text(size = 24))
+      #   return(gp)
+      # }
       return(
         plotTrendGABWRatio(
           input$numeratorGABW, input$denominatorGABW, input$ethGABWSelRatio, input$ethGABWRatio,
@@ -322,14 +322,14 @@ shinyServer(function(input, output, session) {
   
   plotTrendplotAabc <- eventReactive(c(input$aabcSubmit, input$aabcRatioSubmit, input$AABC),{
     if(input$AABC == "analytesAabc"){
-      if(!input$trendAabcSel){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
-          geom_text(aes(x=x, y=y, label=label)) + 
-          scale_x_continuous(limits = c(0,1)) + 
-          scale_y_continuous(limits = c(0,1)) + 
-          theme_void() + theme(text = element_text(size = 24))
-        return(gp)
-      }
+      # if(!input$trendAabcSel){
+      #   gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
+      #     geom_text(aes(x=x, y=y, label=label)) + 
+      #     scale_x_continuous(limits = c(0,1)) + 
+      #     scale_y_continuous(limits = c(0,1)) + 
+      #     theme_void() + theme(text = element_text(size = 24))
+      #   return(gp)
+      # }
       return(
         plotTrendplotAabcAnalytes(
           input$analyteAabc, input$bwAabc, input$gaAabc, input$ethAabcSel, input$ethAabc, 
@@ -337,14 +337,14 @@ shinyServer(function(input, output, session) {
         )
       )
     } else {
-      if(!input$trendAabcRatioSel){
-        gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
-          geom_text(aes(x=x, y=y, label=label)) + 
-          scale_x_continuous(limits = c(0,1)) + 
-          scale_y_continuous(limits = c(0,1)) + 
-          theme_void() + theme(text = element_text(size = 24))
-        return(gp)
-      }
+      # if(!input$trendAabcRatioSel){
+      #   gp <- ggplot(data.frame(x=0.5, y=0.5, label = "Please select 'Show trending plot' and click 'Submit' from the left panel to show this figure.\n It will take about two minutes because of large sample size.")) + 
+      #     geom_text(aes(x=x, y=y, label=label)) + 
+      #     scale_x_continuous(limits = c(0,1)) + 
+      #     scale_y_continuous(limits = c(0,1)) + 
+      #     theme_void() + theme(text = element_text(size = 24))
+      #   return(gp)
+      # }
       return(
         plotTrendplotAabcRatio(
           input$numeratorAabc, input$denominatorAabc, input$bwAabcRatio, input$gaAabcRatio, input$ethAabcSelRatio, input$ethAabcRatio, 

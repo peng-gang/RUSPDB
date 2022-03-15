@@ -3,6 +3,7 @@ library(markdown)
 #library(plotly)
 #library(shinybusy)
 library(shinythemes)
+library(shinycssloaders)
 
 sidebarWidth <- 4
 
@@ -65,7 +66,7 @@ shinyUI(
                   "aabcGABW",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:2
+                  selected = 2
                 )
               ),
               
@@ -90,12 +91,12 @@ shinyUI(
               ),
               
               
-              hr(),
-              
-              tags$div(
-                title = "Select to show smooth line (it will take about 2 mins)",
-                checkboxInput("trendGABWSel", label = "Show smooth line", value = FALSE)
-              ),
+              # hr(),
+              # 
+              # tags$div(
+              #   title = "Select to show smooth line (it will take about 2 mins)",
+              #   checkboxInput("trendGABWSel", label = "Show smooth line", value = FALSE)
+              # ),
               
               hr(),
               
@@ -151,7 +152,7 @@ shinyUI(
                   "aabcGABWRatio",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:2
+                  selected = 2
                 )
               ),
               
@@ -176,12 +177,12 @@ shinyUI(
                 )
               ),
               
-              hr(),
-              
-              tags$div(
-                title = "Select to show smooth line (it will take about 2 mins)",
-                checkboxInput("trendGABWSelRatio", label = "Show smooth line", value = FALSE)
-              ),
+              # hr(),
+              # 
+              # tags$div(
+              #   title = "Select to show smooth line (it will take about 2 mins)",
+              #   checkboxInput("trendGABWSelRatio", label = "Show smooth line", value = FALSE)
+              # ),
               
               hr(),
               
@@ -193,9 +194,9 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("heatGABW"),
+          shinycssloaders::withSpinner(plotOutput("heatGABW")),
           hr(),
-          plotOutput("trendGABW")
+          shinycssloaders::withSpinner(plotOutput("trendGABW"))
         )
       )
     ),
@@ -266,7 +267,7 @@ shinyUI(
                   "aabcEth",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:2
+                  selected = 2
                 )
               ),
               
@@ -381,7 +382,7 @@ shinyUI(
                   "aabcEthRatio",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:2
+                  selected = 2
                 )
               ),
               
@@ -483,7 +484,7 @@ shinyUI(
                   "aabcSex",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:2
+                  selected = 2
                 )
               ),
               
@@ -579,7 +580,7 @@ shinyUI(
                   "aabcSexRatio",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:2
+                  selected = 2
                 )
               ),
               
@@ -707,12 +708,12 @@ shinyUI(
                              selected = 1)
               ),
               
-              hr(),
-              
-              tags$div(
-                title = "Select to show smooth line (it will take about 2 mins)",
-                checkboxInput("trendAabcSel", label = "Show smooth line", value = FALSE)
-              ),
+              # hr(),
+              # 
+              # tags$div(
+              #   title = "Select to show smooth line (it will take about 2 mins)",
+              #   checkboxInput("trendAabcSel", label = "Show smooth line", value = FALSE)
+              # ),
               
               hr(),
               
@@ -810,12 +811,12 @@ shinyUI(
                              selected = 1)
               ),
               
-              hr(),
-              
-              tags$div(
-                title = "Select to show smooth line (it will take about 2 mins)",
-                checkboxInput("trendAabcRatioSel", label = "Show smooth line", value = FALSE)
-              ),
+              # hr(),
+              # 
+              # tags$div(
+              #   title = "Select to show smooth line (it will take about 2 mins)",
+              #   checkboxInput("trendAabcRatioSel", label = "Show smooth line", value = FALSE)
+              # ),
               
               hr(),
               
@@ -826,9 +827,9 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("boxplotAabc"),
+          shinycssloaders::withSpinner(plotOutput("boxplotAabc")),
           hr(),
-          plotOutput("trendplotAabc")
+          shinycssloaders::withSpinner(plotOutput("trendplotAabc"))
         )
       )
     ),
@@ -900,7 +901,7 @@ shinyUI(
                   "aabcTPN",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:length(aabc_group)
+                  selected = 2
                 )
               ),
               
@@ -994,7 +995,7 @@ shinyUI(
                   "aabcTPNRatio",
                   label = h4("Aabc"),
                   choices = makeList(aabc_group),
-                  selected = 1:length(aabc_group)
+                  selected = 2
                 )
               ),
               

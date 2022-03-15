@@ -108,7 +108,7 @@ plotBoxplotEthAnalytes <- function(
       #geom_hline(yintercept = median(dplot$x[dplot$sex == "Female"]), color = "#E18727FF") + 
       labs(x="Enthnicity", y = metaName) + 
       scale_x_discrete(labels = xTicks) + 
-      theme_light() + theme(text = element_text(size = 12))
+      theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     return(gp)
     }
   if(compareEth=="1"&ethEthSel=='2'){
@@ -123,7 +123,7 @@ plotBoxplotEthAnalytes <- function(
       #geom_hline(yintercept = median(dplot$x[dplot$sex == "Female"]), color = "#E18727FF") + 
       labs(x="Enthnicity", y = metaName) + 
       scale_x_discrete(labels = xTicks) + 
-      theme_light() + theme(text = element_text(size = 12))
+      theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     return(gp)}
   else {
     if(compareEth=="2"){
@@ -162,7 +162,7 @@ plotBoxplotEthAnalytes <- function(
         labs(x="Ethnicity", y = metaName, fill = label) + 
         scale_x_discrete(labels = xTicks) + 
         ggsci::scale_color_npg() + 
-        theme_light() + theme(text = element_text(size = 12))
+        theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
       return(gp)
     }
     if (ethEthSel=='2'){
@@ -178,7 +178,8 @@ plotBoxplotEthAnalytes <- function(
         labs(x="Ethnicity", y = metaName, fill = label) + 
         scale_x_discrete(labels = xTicks) + 
         ggsci::scale_color_npg() + 
-        theme_light() + theme(text = element_text(size = 12))
+        theme_light() + 
+        theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
       return(gp)
       
       
@@ -331,7 +332,7 @@ plotBoxplotEthRatio <- function(
       #geom_hline(yintercept = median(dplot$x[dplot$sex == "24-48"]), color = "#E18727FF") + 
       labs(x="Ethnicity", y = ratioName) + 
       scale_x_discrete(labels = xTicks) + 
-      theme_light() + theme(text = element_text(size = 12))
+      theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     return(gp)
   } 
   if(compareEth=="1"&ethEthSel=='2'){
@@ -346,7 +347,7 @@ plotBoxplotEthRatio <- function(
       #geom_hline(yintercept = median(dplot$x[dplot$sex == "24-48"]), color = "#E18727FF") + 
       labs(x="Ethnicity", y = ratioName) + 
       scale_x_discrete(labels = xTicks) + 
-      theme_light() + theme(text = element_text(size = 12))
+      theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     return(gp)
   } 
   
@@ -388,7 +389,7 @@ plotBoxplotEthRatio <- function(
         labs(x="Ethnicity", y = ratioName, fill = label) + 
         scale_x_discrete(labels = xTicks) + 
         ggsci::scale_color_npg() + 
-        theme_light() + theme(text = element_text(size = 12))
+        theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
       return(gp)
     }
     if (ethEthSel=='2'){
@@ -404,7 +405,7 @@ plotBoxplotEthRatio <- function(
         labs(x="Ethnicity", y = ratioName, fill = label) + 
         scale_x_discrete(labels = xTicks) + 
         ggsci::scale_color_npg() + 
-        theme_light() + theme(text = element_text(size = 12))
+        theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
       return(gp)
     }
   }

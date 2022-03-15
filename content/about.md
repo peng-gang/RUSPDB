@@ -10,4 +10,8 @@ Data from 500,539 screen-negative singleton infants born between 2013 and 2017 w
 ## Code
 All the RUSPtools websites are built with <a href="http://www.r-project.org" target="_blank">R</a> and the <a href="http://shiny.rstudio.com" target="_blank">Shiny framework</a> and the source code are publicly available at GitHub(TBA). 
 
+<img src="attention.png" width="30" height="30" /> 
+
+<span style="color: red;"> The sample size in this database is relatively large. It may takes about 30s to 1min to process the data and show the results, especially in "GA and BW" and "Age at blood collection" panels. The processing time depends on the condition of server and internet connection. </span>
+
 If you have any questions or suggestions about RUSPDB, please contact [Dr. Curt Scharfe](mailto:curt.scharfe@yale.edu). 
