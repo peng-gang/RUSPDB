@@ -50,7 +50,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethGABWSel",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -93,8 +93,8 @@ shinyUI(
               hr(),
               
               tags$div(
-                title = "Select to show trending plot (it will take about 2 mins)",
-                checkboxInput("trendGABWSel", label = "Show trending plot", value = FALSE)
+                title = "Select to show smooth line (it will take about 2 mins)",
+                checkboxInput("trendGABWSel", label = "Show smooth line", value = FALSE)
               ),
               
               hr(),
@@ -133,7 +133,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethGABWSelRatio",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -179,8 +179,8 @@ shinyUI(
               hr(),
               
               tags$div(
-                title = "Select to show trending plot (it will take about 2 mins)",
-                checkboxInput("trendGABWSelRatio", label = "Show trending plot", value = FALSE)
+                title = "Select to show smooth line (it will take about 2 mins)",
+                checkboxInput("trendGABWSelRatio", label = "Show smooth line", value = FALSE)
               ),
               
               hr(),
@@ -469,7 +469,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethSexSel",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -564,7 +564,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethSexSelRatio",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -669,7 +669,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethAabcSel",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -710,8 +710,8 @@ shinyUI(
               hr(),
               
               tags$div(
-                title = "Select to show trending plot (it will take about 2 mins)",
-                checkboxInput("trendAabcSel", label = "Show trending plot", value = FALSE)
+                title = "Select to show smooth line (it will take about 2 mins)",
+                checkboxInput("trendAabcSel", label = "Show smooth line", value = FALSE)
               ),
               
               hr(),
@@ -772,7 +772,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethAabcSelRatio",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -813,8 +813,8 @@ shinyUI(
               hr(),
               
               tags$div(
-                title = "Select to show trending plot (it will take about 2 mins)",
-                checkboxInput("trendAabcRatioSel", label = "Show trending plot", value = FALSE)
+                title = "Select to show smooth line (it will take about 2 mins)",
+                checkboxInput("trendAabcRatioSel", label = "Show smooth line", value = FALSE)
               ),
               
               hr(),
@@ -886,7 +886,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethTPNSel",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -979,7 +979,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethTPNSelRatio",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),
@@ -1090,7 +1090,7 @@ shinyUI(
                 title = "Select a ethnicity group to compare",
                 radioButtons(
                   "ethMCSel",
-                  label = h4("Race/Enthnicity"),
+                  label = h4("Enthnicity"),
                   choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
                   selected = 1
                 ),

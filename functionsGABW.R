@@ -307,11 +307,11 @@ plotHeatGABWRatio <- function(
     height = nrow(dplot)*unit(2.2, "cm"),
     
     cell_fun = function(j, i, x, y, width, height, fill){
-      if(median(dplot)>0.1){
+      if(median(dplot)>=0.1){
         grid.text(paste0(sprintf("%.2f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
-      } else if (median(dplot)>0.01) {
+      } else if (median(dplot)>=0.01) {
         grid.text(paste0(sprintf("%.3f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
-      } else if (median(dplot)>0.001) {
+      } else if (median(dplot)>=0.001) {
         grid.text(paste0(sprintf("%.4f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
       } else {
         grid.text(paste0(sprintf("%.2e", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
@@ -431,16 +431,20 @@ plotTrendGABWAnalytes <- function(
     stringsAsFactors = FALSE
   )
   
-  gpGA <- ggplot(dplot) + 
-    geom_smooth(aes(x=GA, y=y, color=BWG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
+  gpGA <- ggplot(dplot[dplot$BWG %in% c("All", "2500-3000", "3001-3500", "3501-4000"),]) +
+    geom_smooth(aes(x=GA, y=y, color=BWG), method = "gam", formula = y ~ s(x, bs = "cs", k=5)) +
+    #geom_smooth(aes(x=GA, y=y, color=BWG)) +
     labs(x="Gestational Age (Week)", y=metaName) + 
+    scale_x_continuous(limits = c(34,42), breaks = c(34, 36, 38, 40, 42)) + 
     scale_color_nejm() + 
     theme_light() + 
     theme(legend.title = element_blank(), legend.position = "bottom")
   
-  gpBW <- ggplot(dplot) + 
+  gpBW <- ggplot(dplot[dplot$GAG %in% c("All", "37-38", "39-40", "41"), ]) + 
     geom_smooth(aes(x=BW, y=y, color=GAG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
+    #geom_smooth(aes(x=BW, y=y, color=GAG)) + 
     labs(x="Birth Weight (g)", y=metaName) + 
+    scale_x_continuous(limits = c(2000,4500)) + 
     scale_color_nejm() + 
     theme_light() + 
     theme(legend.title = element_blank(), legend.position = "bottom")
@@ -583,16 +587,18 @@ plotTrendGABWRatio <- function(
     stringsAsFactors = FALSE
   )
   
-  gpGA <- ggplot(dplot) + 
-    geom_smooth(aes(x=GA, y=y, color=BWG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
+  gpGA <- ggplot(dplot[dplot$BWG %in% c("All", "2500-3000", "3001-3500", "3501-4000"),]) + 
+    geom_smooth(aes(x=GA, y=y, color=BWG), method = "gam", formula = y ~ s(x, bs = "cs", k=5)) + 
     labs(x="Gestational Age (Week)", y=ratioName) + 
+    scale_x_continuous(limits = c(34,42), breaks = c(34, 36, 38, 40, 42)) + 
     scale_color_nejm() + 
     theme_light() + 
     theme(legend.title = element_blank(), legend.position = "bottom")
   
-  gpBW <- ggplot(dplot) + 
+  gpBW <- ggplot(dplot[dplot$GAG %in% c("All", "37-38", "39-40", "41"), ]) + 
     geom_smooth(aes(x=BW, y=y, color=GAG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
     labs(x="Birth Weight (g)", y=ratioName) + 
+    scale_x_continuous(limits = c(2000,4500)) + 
     scale_color_nejm() + 
     theme_light() + 
     theme(legend.title = element_blank(), legend.position = "bottom")

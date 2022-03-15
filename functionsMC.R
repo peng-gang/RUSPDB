@@ -498,13 +498,15 @@ getMCInfoAnalytes <- function(
   
   return(HTML(
     paste(
-      paste0("Mean of selected group: ", format(round(sSel[4], 2), nsmall = 2)),
-      paste0("Mean of common group: ", format(round(sCommon[4], 2), nsmall = 2)),
+      paste0("Mean of the selected group: ", format(round(sSel[4], 2), nsmall = 2)),
+      paste0("Mean of the common group: ", format(round(sCommon[4], 2), nsmall = 2)),
       
-      paste0("Median of selected group: ", format(round(sSel[3], 2), nsmall = 2)),
-      paste0("Median of common group: ", format(round(sCommon[3], 2), nsmall = 2)),
+      paste0("Median of the selected group: ", format(round(sSel[3], 2), nsmall = 2)),
+      paste0("Median of the common group: ", format(round(sCommon[3], 2), nsmall = 2)),
       
-      paste0("Cohen's d between two groups: ", format(round(rltCD$estimate, 2), nsmall = 2)),
+      paste0("Cohen's d between two groups: ", format(round(rltCD$estimate, 2), nsmall = 2), 
+             "(", format(round(rltCD$conf.int[1], 2), nsmall = 2), ",", 
+             format(round(rltCD$conf.int[2], 2), nsmall = 2), ")"),
       
       "<br/>",
       
@@ -722,13 +724,15 @@ getMCInfoRatio <- function(
   
   return(HTML(
     paste(
-      paste0("Mean of selected group: ", format(round(sSel[4], 2), nsmall = 2)),
-      paste0("Mean of common group: ", format(round(sCommon[4], 2), nsmall = 2)),
+      paste0("Mean of the selected group: ", formatRatio(sSel[4])),
+      paste0("Mean of the common group: ", formatRatio(sCommon[4])),
       
-      paste0("Median of selected group: ", format(round(sSel[3], 2), nsmall = 2)),
-      paste0("Median of common group: ", format(round(sCommon[3], 2), nsmall = 2)),
+      paste0("Median of the selected group: ", formatRatio(sSel[3])),
+      paste0("Median of the common group: ", formatRatio(sCommon[3])),
       
-      paste0("Cohen's d between two groups: ", format(round(rltCD$estimate, 2), nsmall = 2)),
+      paste0("Cohen's d between two groups: ", formatRatio(rltCD$estimate), 
+             "(", formatRatio(rltCD$conf.int[1]), ",", 
+             formatRatio(rltCD$conf.int[2]), ")"),
       
       "<br/>",
       
