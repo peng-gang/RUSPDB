@@ -4,6 +4,7 @@ library(markdown)
 #library(shinybusy)
 library(shinythemes)
 library(shinycssloaders)
+library(DT)
 
 sidebarWidth <- 4
 
@@ -12,6 +13,8 @@ shinyUI(
   navbarPage(
     "RUSPDB",
     theme = shinytheme("superhero"),
+    
+    #tags$head(tags$style("div.dataTables_scrollHead span {color: white;}")),
     
 
     ############ about ###########
@@ -414,7 +417,9 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("boxplotEth")
+          plotOutput("boxplotEth"),
+          hr(),
+          DTOutput("tableEth")
         )
       )
     ),
@@ -613,7 +618,9 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("boxplotSex")
+          plotOutput("boxplotSex"),
+          hr(),
+          DTOutput("tableSex")
         )
       )
     ),
@@ -911,7 +918,7 @@ shinyUI(
                   "sexTPN",
                   label = h4("Sex"),
                   choices = makeList(sex_group),
-                  selected = 1
+                  selected = 1:length(sex_group)
                 )
               ),
               
@@ -1005,7 +1012,7 @@ shinyUI(
                   "sexTPNRatio",
                   label = h4("Sex"),
                   choices = makeList(sex_group),
-                  selected = 1
+                  selected = 1:length(sex_group)
                 )
               ),
               
@@ -1027,14 +1034,16 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("boxplotTPN")
+          plotOutput("boxplotTPN"),
+          hr(),
+          DTOutput("tableTPN")
         )
       )
     ),
     
       
     
-    #### multiple comparison ####
+    ######## Multiple comparison #######
     tabPanel(
       "Multiple Comparison",
       sidebarLayout(

@@ -183,10 +183,30 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  createTableEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ENTHNICITY),{
+    if(input$ENTHNICITY == "analytesEth"){
+      return(createTableEthAnalytes(
+        input$analyteEth, input$bwEth, input$gaEth, input$ethEthSel, input$ethEth,
+        input$sexEth, input$aabcEth, input$tpnEth, input$compareEth
+      ))
+    } else {
+      return(
+        createTableEthRatio(
+          input$numeratorEth, input$denominatorEth, input$bwEthRatio, input$gaEthRatio, input$ethEthSelRatio, input$ethEthRatio,
+          input$sexEthRatio, input$aabcEthRatio, input$tpnEthRatio, input$compareEthRatio
+        )
+      )
+    }
+  })
+  
   
   output$boxplotEth <- renderPlot({
     plotBoxplotEth()
   })
+  
+  output$tableEth <- renderDT(
+    createTableEth()
+  )
   
   
 
@@ -251,11 +271,45 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  createTableSex <- eventReactive(c(input$sexSubmit, input$sexRatioSubmit, input$SEX),{
+    if(input$SEX == "analytesSex"){
+      return(createTableSexAnalytes(
+        input$analyteSex, input$bwSex, input$gaSex, input$ethSexSel, input$ethSex, 
+        input$aabcSex, input$tpnSex, input$compareSex
+      ))
+    } else {
+      return(
+        createTableSexRatio(
+          input$numeratorSex, input$denominatorSex, input$bwSexRatio, input$gaSexRatio, input$ethSexSelRatio, input$ethSexRatio, 
+          input$aabcSexRatio, input$tpnSexRatio, input$compareSexRatio
+        )
+      )
+    }
+  })
+  
   
   output$boxplotSex <- renderPlot({
     plotBoxplotSex()
   })
   
+  
+  output$tableSex <- renderDT(
+  #   {
+  #   if(input$compareSex == "1"){
+  #     datatable(createTableSex(),  
+  #               style = "bootstrap4",
+  #               rownames = FALSE) %>% 
+  #       formatRound(2, 2)
+  #       
+  #   } else {
+  #     datatable(createTableSex(),
+  #               style = "bootstrap4",
+  #               rownames = FALSE) %>% 
+  #       formatRound(3, 2)
+  #   }
+  # }
+    createTableSex()
+  )
   
   
   
@@ -421,10 +475,30 @@ shinyServer(function(input, output, session) {
     }
   })
   
+  createTableTPN <- eventReactive(c(input$tpnSubmit, input$tpnRatioSubmit, input$TPN),{
+    if(input$TPN == "analytesTPN"){
+      return(createTableTPNAnalytes(
+        input$analyteTPN, input$bwTPN, input$gaTPN, input$ethTPNSel, input$ethTPN, 
+        input$aabcTPN, input$sexTPN, input$compareTPN
+      ))
+    } else {
+      return(
+        createTableTPNRatio(
+          input$numeratorTPN, input$denominatorTPN, input$bwTPNRatio, input$gaTPNRatio, input$ethTPNSelRatio, input$ethTPNRatio, 
+          input$aabcTPNRatio, input$sexTPNRatio, input$compareTPNRatio
+        )
+      )
+    }
+  })
+  
   
   output$boxplotTPN <- renderPlot({
     plotBoxplotTPN()
   })
+  
+  output$tableTPN <- renderDT(
+    createTableTPN()
+  )
   
   
   
