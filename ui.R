@@ -55,7 +55,7 @@ shinyUI(
                 radioButtons(
                   "ethGABWSel",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -64,10 +64,10 @@ shinyUI(
               
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcGABW",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -138,7 +138,7 @@ shinyUI(
                 radioButtons(
                   "ethGABWSelRatio",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -150,10 +150,10 @@ shinyUI(
               
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcGABWRatio",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -236,7 +236,7 @@ shinyUI(
                 radioButtons(
                   "ethEthSel",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -265,10 +265,10 @@ shinyUI(
               ),
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcEth",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -340,7 +340,7 @@ shinyUI(
                 radioButtons(
                   "ethEthSelRatio",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -380,10 +380,10 @@ shinyUI(
 
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcEthRatio",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -476,7 +476,7 @@ shinyUI(
                 radioButtons(
                   "ethSexSel",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -484,10 +484,10 @@ shinyUI(
               ),
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcSex",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -571,7 +571,7 @@ shinyUI(
                 radioButtons(
                   "ethSexSelRatio",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -580,10 +580,10 @@ shinyUI(
               
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcSexRatio",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -626,7 +626,7 @@ shinyUI(
     ),
     
 
-    ############ aabc ############
+    ############ AaBC ############
     tabPanel(
       "Age at blood collection",
       sidebarLayout(
@@ -678,7 +678,7 @@ shinyUI(
                 radioButtons(
                   "ethAabcSel",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -781,7 +781,7 @@ shinyUI(
                 radioButtons(
                   "ethAabcSelRatio",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -895,7 +895,7 @@ shinyUI(
                 radioButtons(
                   "ethTPNSel",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -903,10 +903,10 @@ shinyUI(
               ),
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcTPN",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -988,7 +988,7 @@ shinyUI(
                 radioButtons(
                   "ethTPNSelRatio",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -997,10 +997,10 @@ shinyUI(
               
               
               tags$div(
-                title = "Select Aabc to include in the figure",
+                title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcTPNRatio",
-                  label = h4("Aabc"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
                 )
@@ -1101,7 +1101,7 @@ shinyUI(
                 radioButtons(
                   "ethMCSel",
                   label = h4("Enthnicity"),
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -1112,7 +1112,7 @@ shinyUI(
                 title = "Select a range of age at boold collection to compare",
                 selectInput(
                   "aabcMC",
-                  label = h4("Age at Blood Collection (hour)"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   multiple = TRUE,
                   selected = 4
@@ -1203,7 +1203,7 @@ shinyUI(
                 radioButtons(
                   "ethMCSelRatio",
                   label = NULL,
-                  choices = list("Major ethnic groups" = 1, "Detailed ethnic groups" = 2),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
                 
@@ -1214,7 +1214,7 @@ shinyUI(
                 title = "Select a range of age at boold collection to compare",
                 selectInput(
                   "aabcMCRatio",
-                  label = h4("Age at Blood Collection (hour)"),
+                  label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   multiple = TRUE,
                   selected = 1

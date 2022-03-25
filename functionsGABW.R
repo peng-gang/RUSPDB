@@ -88,13 +88,13 @@ plotHeatGABWAnalytes <- function(
   sampleSize <- matrix(0, nrow = 5, ncol = 5)
   for(i in 1:5){
     for(j in 1:5){
-      dplot[i,j] <- median(x[idxSel & (flag_ga %in% ga_group[j]) & (flag_bw %in% bw_group[i])])
-      sampleSize[i,j] <- sum(idxSel & (flag_ga %in% ga_group[j]) & (flag_bw %in% bw_group[i]))
+      dplot[i,6-j] <- median(x[idxSel & (flag_ga %in% ga_group[i]) & (flag_bw %in% bw_group[j])])
+      sampleSize[i,6-j] <- sum(idxSel & (flag_ga %in% ga_group[i]) & (flag_bw %in% bw_group[j]))
     }
   }
   
   colnames(dplot) <- ga_group
-  rownames(dplot) <- bw_group
+  rownames(dplot) <- rev(bw_group)
   
   #print(dplot)
   #print(min(dplot, na.rm = TRUE))
@@ -274,13 +274,13 @@ plotHeatGABWRatio <- function(
   sampleSize <- matrix(0, nrow = 5, ncol = 5)
   for(i in 1:5){
     for(j in 1:5){
-      dplot[i,j] <- median(ratio[idxSel & (flag_ga %in% ga_group[j]) & (flag_bw %in% bw_group[i])])
-      sampleSize[i,j] <- sum(idxSel & (flag_ga %in% ga_group[j]) & (flag_bw %in% bw_group[i]))
+      dplot[i,6-j] <- median(ratio[idxSel & (flag_ga %in% ga_group[i]) & (flag_bw %in% bw_group[j])])
+      sampleSize[i,6-j] <- sum(idxSel & (flag_ga %in% ga_group[i]) & (flag_bw %in% bw_group[j]))
     }
   }
   
   colnames(dplot) <- ga_group
-  rownames(dplot) <- bw_group
+  rownames(dplot) <- rev(bw_group)
   
   
   #anaGA <- columnAnnotation(l1 = anno_lines(matrix(rnorm(50), ncol = 10, nrow = 5), which = "row"))
