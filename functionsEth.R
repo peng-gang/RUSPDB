@@ -263,7 +263,7 @@ plotBoxplotEthRatio <- function(
     idxBW <- flag_bw %in% bw_group[as.integer(bwEth)]
   }
   if(length(sexEth) == 1){
-    idxBW <- flag_sex %in% sex_group[as.integer(sexEth)]
+    idxSex <- flag_sex %in% sex_group[as.integer(sexEth)]
   }
   
   if(length(gaEth) > 0){
@@ -682,7 +682,19 @@ createTableEthRatio <- function(
 }
 
 
+df <- list()
+df$numeratorEth <- c('16')
+df$denominatorEth <- c('15')
+df$bwEth <- c('2','3')
+df$gaEth <- c('2','3')
+df$ethEthSel <- c('1')
+df$ethEth <- c('1','2','3','4')
+df$sexEth <- c('1')
+df$aabcEth <- c('1','2')
+df$tpnEth <- c('1')
+df$compareEth <- c('4')
   
-  
-  
+plotBoxplotEthRatio (df$numeratorEth, df$denominatorEth, df$bwEth, df$gaEth, df$ethEthSel, df$ethEth, df$sexEth, 
+  df$aabcEth, df$tpnEth, df$compareEth
+)
   
