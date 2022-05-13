@@ -62,6 +62,15 @@ shinyUI(
                 uiOutput("uiEthGABW")
               ),
               
+              tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexGABW",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
               
               tags$div(
                 title = "Select AaBC to include in the figure",
@@ -82,16 +91,7 @@ shinyUI(
                   selected = 1
                 )
               ),
-              
-              tags$div(
-                title = "Select sex to include in the figure",
-                checkboxGroupInput(
-                  "sexGABW",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
-                )
-              ),
+
               
               
               # hr(),
@@ -145,6 +145,15 @@ shinyUI(
                 uiOutput("uiEthGABWRatio")
               ),
               
+              tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexGABWRatio",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
               
               hr(),
               
@@ -166,17 +175,6 @@ shinyUI(
                   label = h4("TPN"),
                   choices = makeList(tpn_group),
                   selected = 1
-                )
-              ),
-              
-              
-              tags$div(
-                title = "Select sex to include in the figure",
-                checkboxGroupInput(
-                  "sexGABWRatio",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
                 )
               ),
               
@@ -265,6 +263,16 @@ shinyUI(
               ),
               
               tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexEth",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
+              
+              tags$div(
                 title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcEth",
@@ -283,17 +291,7 @@ shinyUI(
                   selected = 1
                 )
               ),
-              
-              tags$div(
-                title = "Select sex to include in the figure",
-                checkboxGroupInput(
-                  "sexEth",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
-                )
-              ),
-              
+            
               
               hr(),
               
@@ -903,6 +901,16 @@ shinyUI(
               ),
               
               tags$div(
+                title = "Select Sex status to include in the figure",
+                checkboxGroupInput(
+                  "sexTPN",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
+              
+              tags$div(
                 title = "Select AaBC to include in the figure",
                 checkboxGroupInput(
                   "aabcTPN",
@@ -912,15 +920,6 @@ shinyUI(
                 )
               ),
               
-              tags$div(
-                title = "Select Sex status to include in the figure",
-                checkboxGroupInput(
-                  "sexTPN",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
-                )
-              ),
               
               hr(),
               
@@ -995,6 +994,16 @@ shinyUI(
                 uiOutput("uiEthTPNRatio")
               ),
               
+              tags$div(
+                title = "Select Sex to include in the figure",
+                checkboxGroupInput(
+                  "sexTPNRatio",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
+              
               
               tags$div(
                 title = "Select AaBC to include in the figure",
@@ -1003,16 +1012,6 @@ shinyUI(
                   label = h4("AaBC (hour)"),
                   choices = makeList(aabc_group),
                   selected = 2
-                )
-              ),
-              
-              tags$div(
-                title = "Select Sex to include in the figure",
-                checkboxGroupInput(
-                  "sexTPNRatio",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
                 )
               ),
               
@@ -1109,18 +1108,6 @@ shinyUI(
               ),
               
               tags$div(
-                title = "Select a range of age at boold collection to compare",
-                selectInput(
-                  "aabcMC",
-                  label = h4("AaBC (hour)"),
-                  choices = makeList(aabc_group),
-                  multiple = TRUE,
-                  selected = 4
-                )
-              ),
-              
-              
-              tags$div(
                 title = "Select sex to compare",
                 selectInput(
                   "sexMC",
@@ -1128,6 +1115,17 @@ shinyUI(
                   choices = makeList(sex_group),
                   multiple = TRUE,
                   selected = 1
+                )
+              ),
+              
+              tags$div(
+                title = "Select a range of age at boold collection to compare",
+                selectInput(
+                  "aabcMC",
+                  label = h4("AaBC (hour)"),
+                  choices = makeList(aabc_group),
+                  multiple = TRUE,
+                  selected = 4
                 )
               ),
               
@@ -1211,23 +1209,22 @@ shinyUI(
               ),
               
               tags$div(
-                title = "Select a range of age at boold collection to compare",
-                selectInput(
-                  "aabcMCRatio",
-                  label = h4("AaBC (hour)"),
-                  choices = makeList(aabc_group),
-                  multiple = TRUE,
-                  selected = 1
-                )
-              ),
-              
-              
-              tags$div(
                 title = "Select sex to compare",
                 selectInput(
                   "sexMCRatio",
                   label = h4("Sex"),
                   choices = makeList(sex_group),
+                  multiple = TRUE,
+                  selected = 1
+                )
+              ),
+              
+              tags$div(
+                title = "Select a range of age at boold collection to compare",
+                selectInput(
+                  "aabcMCRatio",
+                  label = h4("AaBC (hour)"),
+                  choices = makeList(aabc_group),
                   multiple = TRUE,
                   selected = 1
                 )
