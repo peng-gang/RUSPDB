@@ -134,9 +134,10 @@ plotMCAnalytes <- function(
   
   dplot$group <- factor(dplot$group, levels = sort(unique(dplot$group))[c(2,1)])
   
-  colnames(dplot) <- c(metaName, "Group")
+  colnames(dplot) <- c("meta", "Group")
   
-  gp <- ggplot(dplot) + geom_boxplot(aes_string(x="Group", y= metaName)) + 
+  #print(metaName)
+  gp <- ggplot(dplot) + geom_boxplot(aes(x=Group, y= meta)) + 
     labs(x= "", y = metaName) +
     theme_light()
   

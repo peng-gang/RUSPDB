@@ -11,7 +11,7 @@ sidebarWidth <- 4
 # Define UI for application that draws a histogram
 shinyUI(
   navbarPage(
-    "RUSPDB",
+    "dbRUSP",
     theme = shinytheme("superhero"),
     
     #tags$head(tags$style("div.dataTables_scrollHead span {color: white;}")),
