@@ -5,6 +5,7 @@ library(markdown)
 library(shinythemes)
 library(shinycssloaders)
 library(DT)
+library(readxl)
 
 sidebarWidth <- 4
 
@@ -1253,6 +1254,10 @@ shinyUI(
           htmlOutput("infoMC")
         )
       )
-    )
+    ),
+    tabPanel(
+      "Metabolite to condition",
+      DT::dataTableOutput("table")
+      )
   )
 )
