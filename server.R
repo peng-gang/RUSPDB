@@ -167,8 +167,8 @@ shinyServer(function(input, output, session) {
     )
   })
   
-  plotBoxplotEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ENTHNICITY),{
-    if(input$ENTHNICITY == "analytesEth"){
+  plotBoxplotEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ETHNICITY),{
+    if(input$ETHNICITY == "analytesEth"){
       return(plotBoxplotEthAnalytes(
         input$analyteEth, input$bwEth, input$gaEth, input$ethEthSel, input$ethEth,
         input$sexEth, input$aabcEth, input$tpnEth, input$compareEth
@@ -183,8 +183,8 @@ shinyServer(function(input, output, session) {
     }
   })
   
-  createTableEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ENTHNICITY),{
-    if(input$ENTHNICITY == "analytesEth"){
+  createTableEth <- eventReactive(c(input$ethSubmit, input$ethRatioSubmit, input$ETHNICITY),{
+    if(input$ETHNICITY == "analytesEth"){
       return(createTableEthAnalytes(
         input$analyteEth, input$bwEth, input$gaEth, input$ethEthSel, input$ethEth,
         input$sexEth, input$aabcEth, input$tpnEth, input$compareEth

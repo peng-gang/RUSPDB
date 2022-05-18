@@ -38,12 +38,12 @@ shinyUI(
               "Analyte(s)",
               value = "analytesGABW",
               tags$div(
-                title = "Select one or multiple analytes",
+                title = "Select one analyte",
                 selectInput(
                   "analyteGABW",
                   label = h4("Analyte"),
                   choices = makeList(analytes_all),
-                  multiple = TRUE,
+                  multiple = FALSE,
                   selected = which(analytes_all=="C3")
                 )
               ),
@@ -54,7 +54,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethGABWSel",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -137,7 +137,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethGABWSelRatio",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -212,17 +212,17 @@ shinyUI(
           width = sidebarWidth,
           tabsetPanel(
             type = "tabs",
-            id = "ENTHNICITY",
+            id = "ETHNICITY",
             tabPanel(
               "Analyte(s)",
               value = "analytesEth",
               tags$div(
-                title = "Select one or multiple analytes",
+                title = "Select one analyte",
                 selectInput(
                   "analyteEth",
                   label = h4("Analyte"),
                   choices = makeList(analytes_all),
-                  multiple = TRUE,
+                  multiple = FALSE,
                   selected = which(analytes_all=="C3")
                 )
               ),
@@ -233,7 +233,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethEthSel",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -337,7 +337,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethEthSelRatio",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -436,12 +436,12 @@ shinyUI(
               "Analyte(s)",
               value = "analytesSex",
               tags$div(
-                title = "Select one or multiple analytes",
+                title = "Select one analyte",
                 selectInput(
                   "analyteSex",
                   label = h4("Analyte"),
                   choices = makeList(analytes_all),
-                  multiple = TRUE,
+                  multiple = FALSE,
                   selected = which(analytes_all=="C3")
                 )
               ),
@@ -473,7 +473,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethSexSel",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -568,7 +568,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethSexSelRatio",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -637,12 +637,12 @@ shinyUI(
               "Analyte(s)",
               value = "analytesAabc",
               tags$div(
-                title = "Select one or multiple analytes",
+                title = "Select one analyte",
                 selectInput(
                   "analyteAabc",
                   label = h4("Analyte"),
                   choices = makeList(analytes_all),
-                  multiple = TRUE,
+                  multiple = FALSE,
                   selected = which(analytes_all=="C3")
                 )
               ),
@@ -675,7 +675,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethAabcSel",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -778,7 +778,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethAabcSelRatio",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -853,12 +853,12 @@ shinyUI(
               "Analyte(s)",
               value = "analytesTPN",
               tags$div(
-                title = "Select one or multiple analytes",
+                title = "Select one analyte",
                 selectInput(
                   "analyteTPN",
                   label = h4("Analyte"),
                   choices = makeList(analytes_all),
-                  multiple = TRUE,
+                  multiple = FALSE,
                   selected = which(analytes_all=="C3")
                 )
               ),
@@ -892,7 +892,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethTPNSel",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -986,7 +986,7 @@ shinyUI(
                 title = "Select a ethnicity group(s) to include in the figure",
                 radioButtons(
                   "ethTPNSelRatio",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
@@ -1099,7 +1099,7 @@ shinyUI(
                 title = "Select a ethnicity group to compare",
                 radioButtons(
                   "ethMCSel",
-                  label = h4("Enthnicity"),
+                  label = h4("Ethnicity"),
                   choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
                   selected = 1
                 ),
