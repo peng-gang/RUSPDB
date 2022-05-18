@@ -106,7 +106,7 @@ plotBoxplotEthAnalytes <- function(
     }
     gp <- ggplot(dplot) + geom_boxplot(aes(x=eth, y = x)) + 
       #geom_hline(yintercept = median(dplot$x[dplot$sex == "Female"]), color = "#E18727FF") + 
-      labs(x="Enthnicity", y = metaName) + 
+      labs(x="Ethnicity", y = metaName) + 
       scale_x_discrete(labels = xTicks) + 
       theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     return(gp)
@@ -121,7 +121,7 @@ plotBoxplotEthAnalytes <- function(
     }
     gp <- ggplot(dplot) + geom_boxplot(aes(x=eth, y = x)) + 
       #geom_hline(yintercept = median(dplot$x[dplot$sex == "Female"]), color = "#E18727FF") + 
-      labs(x="Enthnicity", y = metaName) + 
+      labs(x="Ethnicity", y = metaName) + 
       scale_x_discrete(labels = xTicks) + 
       theme_light() + theme(text = element_text(size = 12), axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
     return(gp)}

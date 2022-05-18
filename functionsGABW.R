@@ -108,10 +108,12 @@ plotHeatGABWAnalytes <- function(
     cluster_rows = FALSE,
     cluster_columns = FALSE,
     
-    name = metaName,
-    column_title = "Gestational Age (week)",
+    #column_title = "Metabolite Levels by Gestational Age and Birth Weight",
+    
+    #name = paste0(metaName, "(μmol/L)"),
+    column_title = "Metabolite Levels by Gestational Age and Birth Weight\nGestational Age (week)",
     row_title = "Birth Weight (g)",
-    column_title_side = "bottom",
+    column_title_side = "top",
     row_names_side = "left",
     column_title_gp = gpar(fontsize = 14), 
     row_title_gp = gpar(fontsize = 14),
@@ -125,7 +127,8 @@ plotHeatGABWAnalytes <- function(
     cell_fun = function(j, i, x, y, width, height, fill){
       grid.text(paste0(sprintf("%.2f", dplot[i, j]), "\n(n=", sampleSize[i,j], ")"), x, y, gp = gpar(fontsize = 12))
     },
-    heatmap_legend_param = list(title = metaName, 
+    heatmap_legend_param = list(title = bquote(.(metaName)(mu*mol/L)),
+                                  #paste0(metaName, "(\u03bc mol/L)"),
                                 title_gp = gpar(fontsize = 10), 
                                 labels_gp = gpar(fontsize = 10), 
                                 color_bar='continous',
@@ -436,18 +439,18 @@ plotTrendGABWAnalytes <- function(
     #geom_smooth(aes(x=GA, y=y, color=BWG)) +
     labs(x="Gestational Age (Week)", y=metaName) + 
     scale_x_continuous(limits = c(34,42), breaks = c(34, 36, 38, 40, 42)) + 
-    scale_color_nejm() + 
+    scale_color_nejm(name = "Birth Weight (g)") + 
     theme_light() + 
-    theme(legend.title = element_blank(), legend.position = "bottom")
+    theme(legend.position = "bottom")
   
   gpBW <- ggplot(dplot[dplot$GAG %in% c("All", "37-38", "39-40", "41"), ]) + 
     geom_smooth(aes(x=BW, y=y, color=GAG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
     #geom_smooth(aes(x=BW, y=y, color=GAG)) + 
     labs(x="Birth Weight (g)", y=metaName) + 
     scale_x_continuous(limits = c(2000,4500)) + 
-    scale_color_nejm() + 
+    scale_color_nejm(name = "Gestational Age (Week)") + 
     theme_light() + 
-    theme(legend.title = element_blank(), legend.position = "bottom")
+    theme(legend.position = "bottom")
   
   
   gp <- ggarrange(gpGA, gpBW, ncol = 2)
@@ -591,17 +594,17 @@ plotTrendGABWRatio <- function(
     geom_smooth(aes(x=GA, y=y, color=BWG), method = "gam", formula = y ~ s(x, bs = "cs", k=5)) + 
     labs(x="Gestational Age (Week)", y=ratioName) + 
     scale_x_continuous(limits = c(34,42), breaks = c(34, 36, 38, 40, 42)) + 
-    scale_color_nejm() + 
+    scale_color_nejm(name = "Birth Weight (g)") + 
     theme_light() + 
-    theme(legend.title = element_blank(), legend.position = "bottom")
+    theme(legend.position = "bottom")
   
   gpBW <- ggplot(dplot[dplot$GAG %in% c("All", "37-38", "39-40", "41"), ]) + 
     geom_smooth(aes(x=BW, y=y, color=GAG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
     labs(x="Birth Weight (g)", y=ratioName) + 
     scale_x_continuous(limits = c(2000,4500)) + 
-    scale_color_nejm() + 
+    scale_color_nejm(name = "Gestational Age (Week)") + 
     theme_light() + 
-    theme(legend.title = element_blank(), legend.position = "bottom")
+    theme(legend.position = "bottom")
   
   
   gp <- ggarrange(gpGA, gpBW, ncol = 2)
