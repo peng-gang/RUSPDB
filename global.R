@@ -1,5 +1,6 @@
 
 load('data/500KCleanJan0422.RData')
+load("data/RUSP-analyte-to-condition220513.RData")
 #library(cmaker)
 
 source("parameters.R")

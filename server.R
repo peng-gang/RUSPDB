@@ -588,13 +588,16 @@ shinyServer(function(input, output, session) {
   output$infoMC <- renderUI({
     getMCInfo()
   })
-  
-  df <- read_excel("RUSP-analyte-to-condition220513.xlsx")
+
   df$OMIM[complete.cases(df$OMIM)] <- paste0("<a href='",df$OMIM[complete.cases(df$OMIM)],"' target='_blank'>",df$OMIM[complete.cases(df$OMIM)],"</a>")
+  
   render_dt = function(data) {
     renderDT(data)
   }
-  dt_ <- datatable(df, rownames = FALSE, escape=F, options = list(pageLength = 100),style = "bootstrap4")
+  dt_1 <- datatable(df[1:83,], rownames = FALSE, escape=F, options = list(pageLength = 100),style = "bootstrap4")
+  dt_2 <- datatable(df[84:91,], rownames = FALSE, escape=F, options = list(pageLength = 100),style = "bootstrap4")
   
-  output$table = render_dt(dt_)
+  output$tab_1 = render_dt(dt_1)
+  output$tab_2 = renderTable(df[84:91,],colnames=F,na=" ")
+  
 })
