@@ -35,7 +35,7 @@ shinyUI(
             type = "tabs",
             id = "GABW",
             tabPanel(
-              "Analyte(s)",
+              "Analyte",
               value = "analytesGABW",
               tags$div(
                 title = "Select one analyte",
@@ -195,7 +195,7 @@ shinyUI(
         ),
         
         mainPanel(
-          shinycssloaders::withSpinner(plotOutput("heatGABW")),
+          plotOutput("heatGABW"),
           hr(),
           shinycssloaders::withSpinner(plotOutput("trendGABW"))
         )
@@ -214,7 +214,7 @@ shinyUI(
             type = "tabs",
             id = "ETHNICITY",
             tabPanel(
-              "Analyte(s)",
+              "Analyte",
               value = "analytesEth",
               tags$div(
                 title = "Select one analyte",
@@ -433,7 +433,7 @@ shinyUI(
             type = "tabs",
             id = "SEX",
             tabPanel(
-              "Analyte(s)",
+              "Analyte",
               value = "analytesSex",
               tags$div(
                 title = "Select one analyte",
@@ -634,7 +634,7 @@ shinyUI(
             type = "tabs",
             id = "AABC",
             tabPanel(
-              "Analyte(s)",
+              "Analyte",
               value = "analytesAabc",
               tags$div(
                 title = "Select one analyte",
@@ -832,7 +832,7 @@ shinyUI(
         ),
         
         mainPanel(
-          shinycssloaders::withSpinner(plotOutput("boxplotAabc")),
+          plotOutput("boxplotAabc"),
           hr(),
           shinycssloaders::withSpinner(plotOutput("trendplotAabc"))
         )
@@ -850,7 +850,7 @@ shinyUI(
             type = "tabs",
             id = "TPN",
             tabPanel(
-              "Analyte(s)",
+              "Analyte",
               value = "analytesTPN",
               tags$div(
                 title = "Select one analyte",
@@ -1061,7 +1061,7 @@ shinyUI(
                   label = h4("Analyte"),
                   choices = makeList(analytes_all),
                   multiple = TRUE,
-                  selected = which(analytes_all=="C3")
+                  selected = which(analytes_all%in% c("Valine", "Citrulline", "C3"))
                 )
               ),
               
@@ -1248,13 +1248,20 @@ shinyUI(
           )
         ),
         mainPanel(
-          plotOutput("figureMC"),
+          div(style='height:300px;overflow-y: scroll;',
+              uiOutput("uiMC")
+          ),
+        
+          #plotOutput("figureMC"),
           hr(),
+          DTOutput("tableMC"),
           htmlOutput("infoMC")
         )
       )
     ),
     
+    
+    ######## Metabolite to condition #######
     tabPanel(
       "Metabolite to condition",
       DT::dataTableOutput("tab_1"),

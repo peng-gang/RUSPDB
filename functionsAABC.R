@@ -115,7 +115,7 @@ plotBoxplotAabcAnalytes <- function(
     
     gp <- ggplot(dplot) + geom_boxplot(aes(x=aabc, y = x)) + 
       geom_hline(yintercept = median(dplot$x[dplot$aabc == "24-48"]), color = "#E18727FF") + 
-      labs(x="Age at Blood Collection (Hour)", y = metaName) + 
+      labs(x="Age at Blood Collection (Hour)", y = bquote(.(metaName)(mu*mol/L))) + 
       scale_x_discrete(labels = xTicks) + 
       theme_light() + theme(text = element_text(size = 12))
     
@@ -166,7 +166,7 @@ plotBoxplotAabcAnalytes <- function(
     
     gp <- ggplot(dplot) + geom_boxplot(aes(x=aabc, y = x, fill = group)) + 
       #geom_hline(yintercept = median(dplot$x[dplot$aac == "24-48"]), color = "#E18727FF") + 
-      labs(x="Age at Blood Collection (Hour)", y = metaName, fill = label) + 
+      labs(x="Age at Blood Collection (Hour)", y =  bquote(.(metaName)(mu*mol/L)), fill = label) + 
       scale_x_discrete(labels = xTicks) + 
       ggsci::scale_color_npg() + 
       theme_light() + theme(text = element_text(size = 12))
@@ -491,7 +491,7 @@ plotTrendplotAabcAnalytes <- function(
   
   if(compareAabc == "1"){ # no comparison
     gp <- ggplot(dplot) + geom_smooth(aes(x=aabc, y = x), method = "gam", formula = y ~ s(x, bs = "cs")) + 
-      labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = metaName) + 
+      labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = bquote(.(metaName)(mu*mol/L))) + 
       scale_x_continuous(breaks = seq(0, 168, 24), minor_breaks = NULL) + 
       theme_light() + theme(text = element_text(size = 12))
     
@@ -534,7 +534,7 @@ plotTrendplotAabcAnalytes <- function(
     
     gp <- ggplot(dplot) + 
       geom_smooth(aes(x=aabc, y = x, color = group, fill = group), method = "gam", formula = y ~ s(x, bs = "cs")) + 
-      labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y = metaName) + 
+      labs(x = paste0("Age at Blood Collection (Hour)\n(n=", nrow(dplot), ")"), y =  bquote(.(metaName)(mu*mol/L))) + 
       scale_x_continuous(breaks = seq(0, 168, 24), minor_breaks = NULL) + 
       labs(color = label, fill = label) + ggsci::scale_color_npg() + 
       theme_light() + theme(text = element_text(size = 12))

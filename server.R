@@ -2,7 +2,7 @@ library(shiny)
 #library(plotly)
 #library(shinybusy)
 
-load('data/500KCleanJan0422.RData')
+#load('data/500KCleanJan0422.RData')
 
 #source("parameters.R")
 #source("functions.R")
@@ -548,15 +548,44 @@ shinyServer(function(input, output, session) {
   })
   
   
+  output$uiMC <- renderUI({
+    plotOutput("figureMC", height = "300px")
+  })
+  
   # boxplot for multiple comparison
   plotMC <- eventReactive(c(input$mcSubmit, input$mcRatioSubmit, input$multiCompare),{
     if(input$multiCompare == "analytesMC"){
+      output$uiMC <- renderUI({
+        plotOutput("figureMC", height = {
+          paste0(ceiling(length(isolate(input$analyteMC))/3)*300, "px")
+        })
+      })
+      
       return(plotMCAnalytes(
         input$analyteMC, input$bwMC, input$gaMC, input$ethMCSel, input$ethMC, 
         input$aabcMC, input$sexMC, input$tpnMC
       ))
     } else {
+      output$uiMC <- renderUI({
+        plotOutput("figureMC", height = "300px")
+      })
+      
       return(plotMCRatio(
+        input$numeratorMC, input$denominatorMC, input$bwMCRatio, input$gaMCRatio, 
+        input$ethMCSelRatio, input$ethMCRatio, 
+        input$aabcMCRatio, input$sexMCRatio, input$tpnMCRatio
+      ))
+    }
+  })
+  
+  createTableMC <- eventReactive(c(input$mcSubmit, input$mcRatioSubmit, input$multiCompare),{
+    if(input$multiCompare == "analytesMC"){
+      return(createTableMCAnalytes(
+        input$analyteMC, input$bwMC, input$gaMC, input$ethMCSel, input$ethMC, 
+        input$aabcMC, input$sexMC, input$tpnMC
+      ))
+    } else {
+      return(createTableMCRatio(
         input$numeratorMC, input$denominatorMC, input$bwMCRatio, input$gaMCRatio, 
         input$ethMCSelRatio, input$ethMCRatio, 
         input$aabcMCRatio, input$sexMCRatio, input$tpnMCRatio
@@ -585,12 +614,18 @@ shinyServer(function(input, output, session) {
   })
   
   
+  output$tableMC <- renderDT(
+    createTableMC()
+  )
+  
+  
   output$infoMC <- renderUI({
     getMCInfo()
   })
 
-  df$OMIM[complete.cases(df$OMIM)] <- paste0("<a href='",df$OMIM[complete.cases(df$OMIM)],"' target='_blank'>",df$OMIM[complete.cases(df$OMIM)],"</a>")
   
+  
+  df$OMIM[complete.cases(df$OMIM)] <- paste0("<a href='",df$OMIM[complete.cases(df$OMIM)],"' target='_blank'>",df$OMIM[complete.cases(df$OMIM)],"</a>")
   render_dt = function(data) {
     renderDT(data)
   }

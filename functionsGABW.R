@@ -437,7 +437,7 @@ plotTrendGABWAnalytes <- function(
   gpGA <- ggplot(dplot[dplot$BWG %in% c("All", "2500-3000", "3001-3500", "3501-4000"),]) +
     geom_smooth(aes(x=GA, y=y, color=BWG), method = "gam", formula = y ~ s(x, bs = "cs", k=5)) +
     #geom_smooth(aes(x=GA, y=y, color=BWG)) +
-    labs(x="Gestational Age (Week)", y=metaName) + 
+    labs(x="Gestational Age (Week)", y=bquote(.(metaName)(mu*mol/L))) + 
     scale_x_continuous(limits = c(34,42), breaks = c(34, 36, 38, 40, 42)) + 
     scale_color_nejm(name = "Birth Weight (g)") + 
     theme_light() + 
@@ -446,7 +446,7 @@ plotTrendGABWAnalytes <- function(
   gpBW <- ggplot(dplot[dplot$GAG %in% c("All", "37-38", "39-40", "41"), ]) + 
     geom_smooth(aes(x=BW, y=y, color=GAG), method = "gam", formula = y ~ s(x, bs = "cs")) + 
     #geom_smooth(aes(x=BW, y=y, color=GAG)) + 
-    labs(x="Birth Weight (g)", y=metaName) + 
+    labs(x="Birth Weight (g)", y=bquote(.(metaName)(mu*mol/L))) + 
     scale_x_continuous(limits = c(2000,4500)) + 
     scale_color_nejm(name = "Gestational Age (Week)") + 
     theme_light() + 

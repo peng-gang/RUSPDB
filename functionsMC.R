@@ -1,6 +1,7 @@
 # functions for multiple comparison
 
 library(ggplot2)
+library(ggpubr)
 library(effsize)
 
 
@@ -54,8 +55,8 @@ plotMCAnalytes <- function(
     meta <- meta_data[, as.integer(analyteMC)]
     metaName <- analytes_all[as.integer(analyteMC)]
   } else {
-    meta <- meta_data[, as.integer(analyteMC)]
-    metaName <- paste(analytes_all[sort(as.integer(analyteMC))], collapse = " + ")
+    meta <- meta_data[, sort(as.integer(analyteMC))]
+    metaName <- analytes_all[sort(as.integer(analyteMC))]
   }
   
   idxBW <- rep(TRUE, nrow(meta_data))
@@ -117,29 +118,61 @@ plotMCAnalytes <- function(
     flag_tpn %in% c("NoTPN")
   
   
-  if(length(analyteMC) == 1){
-    x <- meta
-  } else {
-    x <- rowSums(meta)
+  gps <- list()
+  for(i in 1:length(metaName)){
+    if(length(metaName) == 1){
+      x = meta
+    } else {
+      x <- meta[,i]
+    }
+    
+    
+    dplot <- data.frame(
+      x = c(x[idxSel], x[idxCommon]),
+      group = c(
+        rep("Selected", sum(idxSel)), 
+        rep("Common", sum(idxCommon))
+      ),
+      stringsAsFactors = FALSE
+    )
+    
+    dplot$group <- factor(dplot$group, levels = sort(unique(dplot$group))[c(2,1)])
+    
+    colnames(dplot) <- c("meta", "Group")
+    
+    #print(metaName)
+    gp <- ggplot(dplot) + geom_boxplot(aes(x=Group, y= meta)) + 
+      labs(x= "", y = bquote(.(metaName[i])(mu*mol/L))) +
+      theme_light()
+    
+    gps[[i]] <- gp
   }
   
-  dplot <- data.frame(
-    x = c(x[idxSel], x[idxCommon]),
-    group = c(
-      rep(paste0("Selected (n = ", sum(idxSel), ")"), sum(idxSel)), 
-      rep(paste0("Common (n = ", sum(idxCommon), ")"), sum(idxCommon))
-    ),
-    stringsAsFactors = FALSE
-  )
-  
-  dplot$group <- factor(dplot$group, levels = sort(unique(dplot$group))[c(2,1)])
-  
-  colnames(dplot) <- c("meta", "Group")
-  
-  #print(metaName)
-  gp <- ggplot(dplot) + geom_boxplot(aes(x=Group, y= meta)) + 
-    labs(x= "", y = metaName) +
-    theme_light()
+  nc <- min(length(metaName), 3)
+  gp <- ggarrange(plotlist = gps, ncol = nc, nrow = ceiling(length(metaName)/nc))
+  # if(length(analyteMC) == 1){
+  #   x <- meta
+  # } else {
+  #   x <- rowSums(meta)
+  # }
+  # 
+  # dplot <- data.frame(
+  #   x = c(x[idxSel], x[idxCommon]),
+  #   group = c(
+  #     rep(paste0("Selected (n = ", sum(idxSel), ")"), sum(idxSel)), 
+  #     rep(paste0("Common (n = ", sum(idxCommon), ")"), sum(idxCommon))
+  #   ),
+  #   stringsAsFactors = FALSE
+  # )
+  # 
+  # dplot$group <- factor(dplot$group, levels = sort(unique(dplot$group))[c(2,1)])
+  # 
+  # colnames(dplot) <- c("meta", "Group")
+  # 
+  # #print(metaName)
+  # gp <- ggplot(dplot) + geom_boxplot(aes(x=Group, y= meta)) + 
+  #   labs(x= "", y = metaName) +
+  #   theme_light()
   
   return(gp)
   
@@ -435,16 +468,16 @@ getMCInfoAnalytes <- function(
     flag_tpn %in% c("NoTPN")
   
   
-  if(length(analyteMC) == 1){
-    x <- meta
-  } else {
-    x <- rowSums(meta)
-  }
-  
-  rltCD <- cohen.d(x[idxSel], x[idxCommon])
-  rltTT <- t.test(x[idxSel], x[idxCommon])
-  sSel <- summary(x[idxSel])
-  sCommon <- summary(x[idxCommon])
+  # if(length(analyteMC) == 1){
+  #   x <- meta
+  # } else {
+  #   x <- rowSums(meta)
+  # }
+  # 
+  # rltCD <- cohen.d(x[idxSel], x[idxCommon])
+  # rltTT <- t.test(x[idxSel], x[idxCommon])
+  # sSel <- summary(x[idxSel])
+  # sCommon <- summary(x[idxCommon])
   
   selInfo <- ""
   
@@ -493,31 +526,30 @@ getMCInfoAnalytes <- function(
     selInfo <- paste0(selInfo, "Total parenteral nutrition (TPN): ", tpnInfo)
   }
   
-  commonInfo <- "Newborns with birth weight between 2500-4000g, gestational age between 37-41 weeks, age at blood collection between 24-48 hours, and without TPN"
-  
+  commonInfo <- "Birth weight: 2500-4000g <br/> Gestational age: 37-41 weeks <br/> Age at blood collection: 24-48 hours <br/>  TPN: NoTPN"
   
   
   return(HTML(
     paste(
-      paste0("Mean of the selected group: ", format(round(sSel[4], 2), nsmall = 2)),
-      paste0("Mean of the common group: ", format(round(sCommon[4], 2), nsmall = 2)),
+      #paste0("Mean of the selected group: ", format(round(sSel[4], 2), nsmall = 2)),
+      #paste0("Mean of the common group: ", format(round(sCommon[4], 2), nsmall = 2)),
       
-      paste0("Median of the selected group: ", format(round(sSel[3], 2), nsmall = 2)),
-      paste0("Median of the common group: ", format(round(sCommon[3], 2), nsmall = 2)),
+      #paste0("Median of the selected group: ", format(round(sSel[3], 2), nsmall = 2)),
+      #paste0("Median of the common group: ", format(round(sCommon[3], 2), nsmall = 2)),
       
-      paste0("Cohen's d between two groups: ", format(round(rltCD$estimate, 2), nsmall = 2), 
-             "(", format(round(rltCD$conf.int[1], 2), nsmall = 2), ",", 
-             format(round(rltCD$conf.int[2], 2), nsmall = 2), ")"),
+      #paste0("Cohen's d between two groups: ", format(round(rltCD$estimate, 2), nsmall = 2), 
+      #       "(", format(round(rltCD$conf.int[1], 2), nsmall = 2), ",", 
+      #       format(round(rltCD$conf.int[2], 2), nsmall = 2), ")"),
       
-      "<br/>",
+      #"<br/>",
       
-      paste0("Selected group: "),
+      paste0("Selected group (n=", sum(idxSel), "): "),
       
       selInfo,
       
       "<br/>",
       
-      paste0("Common group: "),
+      paste0("Common group (n=", sum(idxCommon), "): "),
       
       commonInfo,
       
@@ -716,34 +748,34 @@ getMCInfoRatio <- function(
     if(selInfo!=""){
       selInfo <- paste0(selInfo, "<br/>")
     }
-    selInfo <- paste0(selInfo, "Total parenteral nutrition (TPN): ", tpnInfo)
+    selInfo <- paste0(selInfo, "TPN: ", tpnInfo)
   }
   
   
-  commonInfo <- "Newborns with birth weight between 2500-4000g, gestational age between 37-41 weeks, age at blood collection between 24-48 hours, and without TPN"
+  commonInfo <- "Birth weight: 2500-4000g <br/> Gestational age: 37-41 weeks <br/> Age at blood collection: 24-48 hours <br/>  TPN: NoTPN"
   
   
   return(HTML(
     paste(
-      paste0("Mean of the selected group: ", formatRatio(sSel[4])),
-      paste0("Mean of the common group: ", formatRatio(sCommon[4])),
+      # paste0("Mean of the selected group: ", formatRatio(sSel[4])),
+      # paste0("Mean of the common group: ", formatRatio(sCommon[4])),
+      # 
+      # paste0("Median of the selected group: ", formatRatio(sSel[3])),
+      # paste0("Median of the common group: ", formatRatio(sCommon[3])),
+      # 
+      # paste0("Cohen's d between two groups: ", formatRatio(rltCD$estimate), 
+      #        "(", formatRatio(rltCD$conf.int[1]), ",", 
+      #        formatRatio(rltCD$conf.int[2]), ")"),
+      # 
+      # "<br/>",
       
-      paste0("Median of the selected group: ", formatRatio(sSel[3])),
-      paste0("Median of the common group: ", formatRatio(sCommon[3])),
-      
-      paste0("Cohen's d between two groups: ", formatRatio(rltCD$estimate), 
-             "(", formatRatio(rltCD$conf.int[1]), ",", 
-             formatRatio(rltCD$conf.int[2]), ")"),
-      
-      "<br/>",
-      
-      paste0("Selected group: "),
+      paste0("Selected group: (n=", sum(idxSel), ")"),
       
       selInfo,
       
       "<br/>",
       
-      paste0("Common group: "),
+      paste0("Common group: (n=", sum(idxCommon), ")"),
       
       commonInfo,
       
@@ -752,5 +784,346 @@ getMCInfoRatio <- function(
   ))
 }
   
+
+createTableMCAnalytes <- function(
+    analyteMC, bwMC, gaMC, ethMCSel, ethMC, 
+    aabcMC, sexMC, tpnMC){
+  if(is.null(ethMC)){
+    ethMC = "2"
+  }
+  
+  if(length(analyteMC) == 0){
+    meta <- NULL
+    metaName <- NULL
+    
+    return(NULL)
+    
+  }  else if(length(analyteMC) == 1){
+    meta <- meta_data[, as.integer(analyteMC)]
+    metaName <- analytes_all[as.integer(analyteMC)]
+  } else {
+    meta <- meta_data[, sort(as.integer(analyteMC))]
+    metaName <- analytes_all[sort(as.integer(analyteMC))]
+  }
+  
+  idxBW <- rep(TRUE, nrow(meta_data))
+  idxGA <- rep(TRUE, nrow(meta_data))
+  idxEth <- rep(TRUE, nrow(meta_data))
+  idxAabc <- rep(TRUE, nrow(meta_data))
+  idxSex <- rep(TRUE, nrow(meta_data))
+  idxTPN <- rep(TRUE, nrow(meta_data))
+  
+  # bwInfo <- NULL
+  # gaInfo <- NULL
+  # ethInfo <- NULL
+  # aabcInfo <- NULL
+  # sexInfo <- NULL
+  # tpnInfo <- NULL
+  
+  if(length(bwMC) > 0){
+    idxBW <- flag_bw %in% bw_group[as.integer(bwMC)]
+    #bwInfo <- paste(bw_group[as.integer(bwMC)], collapse = ";")
+  } else {
+    #bwInfo <- "All"
+  }
+  
+  if(length(gaMC) > 0){
+    idxGA <- flag_ga %in% ga_group[as.integer(gaMC)]
+    #gaInfo <- paste(ga_group[as.integer(gaMC)], collapse = ";")
+  } else {
+    #gaInfo <- All
+  }
+  
+  if(ethMCSel == "1"){
+    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group)){
+      idxEth <- ethnicity$eth_state %in% ethnicity_group[as.integer(ethMC)]
+      #ethInfo <- paste(ethnicity_group[as.integer(ethMC)], collapse = ";")
+    } else {
+      #ethInfo <- "All"
+    }
+  } else {
+    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group_details)){
+      idxEth <- ethnicity$eth_detail %in% ethnicity_group_details[as.integer(ethMC)]
+      #ethInfo <- paste(ethnicity_group_details[as.integer(ethMC)], collapse = ";")
+    } else {
+      #ethInfo <- "All"
+    }
+  }
+  
+  if(length(aabcMC) > 0){
+    idxAabc <- flag_aabc %in% aabc_group[as.integer(aabcMC)]
+    #aabcInfo <- paste(aabc_group[as.integer(aabcMC)], collapse = ";")
+  } else {
+    #aabcInfo <- "All"
+  }
+  
+  
+  if(length(sexMC) == 1){
+    idxSex <- flag_sex %in% sex_group[as.integer(sexMC)]
+    #sexInfo <- sex_group[as.integer(sexMC)]
+  } else {
+    #sexInfo <- "All"
+  }
+  
+  
+  if(length(tpnMC) == 1){
+    idxTPN <- flag_tpn %in% tpn_group[as.integer(tpnMC)]
+    #tpnInfo <- tpn_group[as.integer(tpnMC)]
+  } else {
+    #tpnInfo <- "All"
+  }
+  
+  
+  idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxSex & idxTPN
+  
+  if(sum(idxSel) == 0){
+    return(NULL)
+  }
+  
+  idxCommon <- idx_include & 
+    flag_bw %in% c("2500-3000", "3001-3500", "3501-4000") &
+    flag_ga %in% c("37-38", "39-40", "41") & 
+    flag_aabc %in% c("24-48") &
+    flag_tpn %in% c("NoTPN")
+  
+  
+  meanSel <- NULL
+  meanCommon <- NULL
+  medianSel <- NULL
+  medianCommon <- NULL
+  cd <- NULL
+  for(i in 1:length(analyteMC)){
+    if(length(analyteMC)==1){
+      x <- meta
+    } else {
+      x <- meta[,i]
+    }
+    
+    rltCD <- cohen.d(x[idxSel], x[idxCommon])
+    cd <- c(cd, rltCD$estimate)
+    meanSel <- c(meanSel, mean(x[idxSel]))
+    meanCommon <- c(meanCommon, mean(x[idxCommon]))
+    
+    medianSel <- c(medianSel, median(x[idxSel]))
+    medianCommon <- c(medianCommon, median(x[idxCommon]))
+  }
+  
+  rlt <- data.frame(
+    meanSel,
+    meanCommon,
+    medianSel,
+    medianCommon,
+    cd
+  )
+  
+  #colnames(rlt) <- c("Selected", "Common", "Selected", "Common", "Cohen's d")
+  rownames(rlt) <- metaName
+  
+  sketch = htmltools::withTags(table(
+    class = 'display',
+    thead(
+      tr(
+        th(class = 'dt-center', rowspan = 2, " "),
+        th(class = 'dt-center', colspan = 2, "Mean"),
+        th(class = 'dt-center', colspan = 2, "Median"),
+        th(class = 'dt-center', rowspan = 2, "Cohen's d"),
+      ),
+      tr(
+        lapply(rep(c('Selected', 'Common'), 2), th)
+      )
+    )
+  ))
+  
+  datatable(rlt,  
+            style = "bootstrap4",
+            container = sketch,
+            options = list(
+              columnDefs = list(list(className = 'dt-head-center', targets = 0:5))
+            ),
+            rownames = TRUE) %>% 
+    formatRound(1:5, 2)
+}
+
+
+
+
+
+createTableMCRatio <- function(
+    numeratorMC, denominatorMC, bwMC, gaMC, ethMCSel, ethMC, 
+    aabcMC, sexMC, tpnMC){
+  
+  if(is.null(ethMC)){
+    ethMC = "3"
+  }
+  
+  if(length(numeratorMC) == 0){
+    numer <- NULL
+    numerName <- NULL
+    
+    return(NULL)
+    
+  }  else if(length(numeratorMC) == 1){
+    numer <- meta_data[, as.integer(numeratorMC)]
+    numerName <- analytes_all[as.integer(numeratorMC)]
+  } else {
+    numer <- meta_data[, as.integer(numeratorMC)]
+    numerName <- paste(analytes_all[sort(as.integer(numeratorMC))], collapse = " + ")
+  }
+  
+  
+  if(length(denominatorMC) == 0){
+    denom <- NULL
+    denomName <- NULL
+    
+    return(HTML("Please select at least one analyte for denominator from the left panel"))
+    
+  }  else if(length(denominatorMC) == 1){
+    denom <- meta_data[, as.integer(denominatorMC)]
+    denomName <- analytes_all[as.integer(denominatorMC)]
+  } else {
+    denom <- meta_data[, as.integer(denominatorMC)]
+    denomName <- paste(analytes_all[sort(as.integer(denominatorMC))], collapse = " + ")
+  }
+  
+  
+  
+  idxBW <- rep(TRUE, nrow(meta_data))
+  idxGA <- rep(TRUE, nrow(meta_data))
+  idxEth <- rep(TRUE, nrow(meta_data))
+  idxAabc <- rep(TRUE, nrow(meta_data))
+  idxSex <- rep(TRUE, nrow(meta_data))
+  idxTPN <- rep(TRUE, nrow(meta_data))
+  
+  # bwInfo <- NULL
+  # gaInfo <- NULL
+  # ethInfo <- NULL
+  # aabcInfo <- NULL
+  # sexInfo <- NULL
+  # tpnInfo <- NULL
+  
+  if(length(bwMC) > 0){
+    idxBW <- flag_bw %in% bw_group[as.integer(bwMC)]
+    #bwInfo <- paste(bw_group[as.integer(bwMC)], collapse = ";")
+  } else {
+    #bwInfo <- "All"
+  }
+  
+  if(length(gaMC) > 0){
+    idxGA <- flag_ga %in% ga_group[as.integer(gaMC)]
+    #gaInfo <- paste(ga_group[as.integer(gaMC)], collapse = ";")
+  } else {
+    #gaInfo <- All
+  }
+  
+  if(ethMCSel == "1"){
+    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group)){
+      idxEth <- ethnicity$eth_state %in% ethnicity_group[as.integer(ethMC)]
+      #ethInfo <- paste(ethnicity_group[as.integer(ethMC)], collapse = ";")
+    } else {
+      #ethInfo <- "All"
+    }
+  } else {
+    if(length(ethMC) > 0 & length(ethMC) < length(ethnicity_group_details)){
+      idxEth <- ethnicity$eth_detail %in% ethnicity_group_details[as.integer(ethMC)]
+      #ethInfo <- paste(ethnicity_group_details[as.integer(ethMC)], collapse = ";")
+    } else {
+      #ethInfo <- "All"
+    }
+  }
+  
+  if(length(aabcMC) > 0){
+    idxAabc <- flag_aabc %in% aabc_group[as.integer(aabcMC)]
+    #aabcInfo <- paste(aabc_group[as.integer(aabcMC)], collapse = ";")
+  } else {
+    #aabcInfo <- "All"
+  }
+  
+  
+  if(length(sexMC) == 1){
+    idxSex <- flag_sex %in% sex_group[as.integer(sexMC)]
+    #sexInfo <- sex_group[as.integer(sexMC)]
+  } else {
+    #sexInfo <- "All"
+  }
+  
+  
+  if(length(tpnMC) == 1){
+    idxTPN <- flag_tpn %in% tpn_group[as.integer(tpnMC)]
+    #tpnInfo <- tpn_group[as.integer(tpnMC)]
+  } else {
+    #tpnInfo <- "All"
+  }
+  
+  
+  idxSel <- idx_include & idxBW & idxGA & idxEth & idxAabc & idxSex & idxTPN
+  
+  if(sum(idxSel) == 0){
+    return(NULL)
+  }
+  
+  idxCommon <- idx_include & 
+    flag_bw %in% c("2500-3000", "3001-3500", "3501-4000") &
+    flag_ga %in% c("37-38", "39-40", "41") & 
+    flag_aabc %in% c("24-48") &
+    flag_tpn %in% c("NoTPN")
+  
+  
+  if(length(numeratorMC) == 1){
+    x <- numer
+  } else {
+    x <- rowSums(numer)
+    numerName <- paste0("(", numerName, ")")
+  }
+  
+  if(length(denominatorMC) == 1){
+    y <- denom
+  } else {
+    y <- rowSums(denom)
+    denomName <- paste0("(", denomName, ")")
+  }
+  
+  ratioName <- paste0(numerName, "/", denomName)
+  
+  ratio <- x/y
+  
+  rlt <- data.frame(
+    mean(ratio[idxSel]),
+    mean(ratio[idxCommon]),
+    median(ratio[idxSel]),
+    median(ratio[idxCommon]),
+    cd = cohen.d(ratio[idxSel], ratio[idxCommon])$estimate
+  )
+  
+  
+  rownames(rlt) <- ratioName
+  
+  sketch = htmltools::withTags(table(
+    class = 'display',
+    thead(
+      tr(
+        th(class = 'dt-center', rowspan = 2, " "),
+        th(class = 'dt-center', colspan = 2, "Mean"),
+        th(class = 'dt-center', colspan = 2, "Median"),
+        th(class = 'dt-center', rowspan = 2, "Cohen's d"),
+      ),
+      tr(
+        lapply(rep(c('Selected', 'Common'), 2), th)
+      )
+    )
+  ))
+  
+  
+  datatable(rlt,  
+            style = "bootstrap4",
+            container = sketch,
+            options = list(
+              columnDefs = list(list(className = 'dt-head-center', targets = 0:5))
+            ),
+            rownames = TRUE) %>% 
+    formatRound(1:5, 3)
+  
+
+  
+}
   
   

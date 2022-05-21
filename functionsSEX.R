@@ -115,7 +115,7 @@ plotBoxplotSexAnalytes <- function(
   
     gp <- ggplot(dplot) + geom_boxplot(aes(x=sex, y = x)) + 
       #geom_hline(yintercept = median(dplot$x[dplot$sex == "Female"]), color = "#E18727FF") + 
-      labs(x="Sex", y = metaName) + 
+      labs(x="Sex", y = bquote(.(metaName)(mu*mol/L))) + 
       scale_x_discrete(labels = xTicks) + 
       theme_light() + theme(text = element_text(size = 12))
     
@@ -166,7 +166,7 @@ plotBoxplotSexAnalytes <- function(
     
     gp <- ggplot(dplot) + geom_boxplot(aes(x=sex, y = x, fill = group)) + 
       #geom_hline(yintercept = median(dplot$x[dplot$aac == "24-48"]), color = "#E18727FF") + 
-      labs(x="Sex", y = metaName, fill = label) + 
+      labs(x="Sex", y =  bquote(.(metaName)(mu*mol/L)), fill = label) + 
       scale_x_discrete(labels = xTicks) + 
       ggsci::scale_color_npg() + 
       theme_light() + theme(text = element_text(size = 12))
