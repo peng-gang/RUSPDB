@@ -892,6 +892,7 @@ createTableMCAnalytes <- function(
   medianSel <- NULL
   medianCommon <- NULL
   cd <- NULL
+  cdCI <- NULL
   for(i in 1:length(analyteMC)){
     if(length(analyteMC)==1){
       x <- meta
@@ -901,6 +902,10 @@ createTableMCAnalytes <- function(
     
     rltCD <- cohen.d(x[idxSel], x[idxCommon])
     cd <- c(cd, rltCD$estimate)
+    cdCI <- c(cdCI, paste0(
+      format(round(rltCD$conf.int[1], 2), nsmall = 2), 
+      ", ", 
+      format(round(rltCD$conf.int[2], 2), nsmall = 2)))
     meanSel <- c(meanSel, mean(x[idxSel]))
     meanCommon <- c(meanCommon, mean(x[idxCommon]))
     
@@ -913,7 +918,9 @@ createTableMCAnalytes <- function(
     meanCommon,
     medianSel,
     medianCommon,
-    cd
+    cd,
+    cdCI,
+    stringsAsFactors = FALSE
   )
   
   #colnames(rlt) <- c("Selected", "Common", "Selected", "Common", "Cohen's d")
@@ -927,6 +934,7 @@ createTableMCAnalytes <- function(
         th(class = 'dt-center', colspan = 2, "Mean"),
         th(class = 'dt-center', colspan = 2, "Median"),
         th(class = 'dt-center', rowspan = 2, "Cohen's d"),
+        th(class = 'dt-center', rowspan = 2, "95% CI")
       ),
       tr(
         lapply(rep(c('Selected', 'Common'), 2), th)
@@ -938,7 +946,7 @@ createTableMCAnalytes <- function(
             style = "bootstrap4",
             container = sketch,
             options = list(
-              columnDefs = list(list(className = 'dt-head-center', targets = 0:5))
+              columnDefs = list(list(className = 'dt-head-center', targets = 0:6))
             ),
             rownames = TRUE) %>% 
     formatRound(1:5, 2)
@@ -1086,14 +1094,24 @@ createTableMCRatio <- function(
   
   ratio <- x/y
   
+  
+  rltCD <- cohen.d(ratio[idxSel], ratio[idxCommon])
+  print(rltCD)
   rlt <- data.frame(
     mean(ratio[idxSel]),
     mean(ratio[idxCommon]),
     median(ratio[idxSel]),
     median(ratio[idxCommon]),
-    cd = cohen.d(ratio[idxSel], ratio[idxCommon])$estimate
+    
+    cd = rltCD$estimate,
+    cdCI = paste0(
+      format(round(rltCD$conf.int[1], 2), nsmall = 2), 
+      ", ", 
+      format(round(rltCD$conf.int[2], 2), nsmall = 2)),
+    stringsAsFactors = FALSE
   )
   
+  print(rlt)
   
   rownames(rlt) <- ratioName
   
@@ -1105,6 +1123,7 @@ createTableMCRatio <- function(
         th(class = 'dt-center', colspan = 2, "Mean"),
         th(class = 'dt-center', colspan = 2, "Median"),
         th(class = 'dt-center', rowspan = 2, "Cohen's d"),
+        th(class = 'dt-center', rowspan = 2, "95% CI")
       ),
       tr(
         lapply(rep(c('Selected', 'Common'), 2), th)
@@ -1117,7 +1136,7 @@ createTableMCRatio <- function(
             style = "bootstrap4",
             container = sketch,
             options = list(
-              columnDefs = list(list(className = 'dt-head-center', targets = 0:5))
+              columnDefs = list(list(className = 'dt-head-center', targets = 0:6))
             ),
             rownames = TRUE) %>% 
     formatRound(1:5, 3)

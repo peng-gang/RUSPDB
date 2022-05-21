@@ -195,7 +195,7 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("heatGABW"),
+          shinycssloaders::withSpinner(plotOutput("heatGABW")),
           hr(),
           shinycssloaders::withSpinner(plotOutput("trendGABW"))
         )
@@ -832,7 +832,7 @@ shinyUI(
         ),
         
         mainPanel(
-          plotOutput("boxplotAabc"),
+          shinycssloaders::withSpinner(plotOutput("boxplotAabc")),
           hr(),
           shinycssloaders::withSpinner(plotOutput("trendplotAabc"))
         )
