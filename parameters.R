@@ -1,6 +1,6 @@
 # parameters
 aabc_group <- c("12-23", "24-48", "49-72", "73-168")
-sex_group <- c("Male", "Female")
+sex_group <- c("Female", "Male")
 bw_group <- c("1000-2499", "2500-3000", "3001-3500", "3501-4000", "4001-5000")
 ga_group <- c("28-36", "37-38", "39-40", "41",  "42")
 ethnicity_group <- c("Asian", "Black", "Hispanic", "White")

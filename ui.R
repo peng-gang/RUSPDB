@@ -1255,6 +1255,7 @@ shinyUI(
           #plotOutput("figureMC"),
           hr(),
           DTOutput("tableMC"),
+          hr(),
           htmlOutput("infoMC")
         )
       )
