@@ -1114,7 +1114,7 @@ shinyUI(
                   label = h4("Sex"),
                   choices = makeList(sex_group),
                   multiple = TRUE,
-                  selected = 1
+                  selected = 2
                 )
               ),
               
