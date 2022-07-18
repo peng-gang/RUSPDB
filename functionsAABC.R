@@ -113,7 +113,10 @@ plotBoxplotAabcAnalytes <- function(
       }
     }
     
-    gp <- ggplot(dplot) + geom_boxplot(aes(x=aabc, y = x)) + 
+    gp <- ggplot(dplot) + 
+      #geom_violin(aes(x=aabc, y = x)) + 
+      #geom_boxplot(aes(x=aabc, y = x), width = 0.1) + 
+      geom_boxplot(aes(x=aabc, y = x)) + 
       geom_hline(yintercept = median(dplot$x[dplot$aabc == "24-48"]), color = "#E18727FF") + 
       labs(x="Age at Blood Collection (Hour)", y = bquote(.(metaName)(mu*mol/L))) + 
       scale_x_discrete(labels = xTicks) + 
@@ -164,10 +167,15 @@ plotBoxplotAabcAnalytes <- function(
       }
     }
     
-    gp <- ggplot(dplot) + geom_boxplot(aes(x=aabc, y = x, fill = group)) + 
+    gp <- ggplot(dplot) + 
+      #ggplot(dplot, aes(x=aabc, y = x, fill = group, group = interaction(aabc,group))) + 
+      #geom_violin(position=position_dodge(0.75)) + 
+      #geom_boxplot(width = 0.1, position=position_dodge(0.75), color = "grey") + 
+      geom_boxplot(aes(x=aabc, y = x, fill = group)) + 
       #geom_hline(yintercept = median(dplot$x[dplot$aac == "24-48"]), color = "#E18727FF") + 
       labs(x="Age at Blood Collection (Hour)", y =  bquote(.(metaName)(mu*mol/L)), fill = label) + 
       scale_x_discrete(labels = xTicks) + 
+      ggsci::scale_fill_npg() + 
       ggsci::scale_color_npg() + 
       theme_light() + theme(text = element_text(size = 12))
     
@@ -323,7 +331,10 @@ plotBoxplotAabcRatio <- function(
       }
     }
     
-    gp <- ggplot(dplot) + geom_boxplot(aes(x=aabc, y = x)) + 
+    gp <- ggplot(dplot) + 
+      #geom_violin(aes(x=aabc, y = x)) + 
+      #geom_boxplot(aes(x=aabc, y = x), width = 0.1) + 
+      geom_boxplot(aes(x=aabc, y = x)) + 
       geom_hline(yintercept = median(dplot$x[dplot$aabc == "24-48"]), color = "#E18727FF") + 
       labs(x="Age at Blood Collection (Hour)", y = ratioName) + 
       scale_x_discrete(labels = xTicks) + 
@@ -374,10 +385,14 @@ plotBoxplotAabcRatio <- function(
       }
     }
     
-    gp <- ggplot(dplot) + geom_boxplot(aes(x=aabc, y = x, fill = group)) + 
+    gp <- ggplot(dplot) + 
+      #geom_violin(aes(x=aabc, y = x, fill = group), position=position_dodge(1)) + 
+      #geom_boxplot(aes(x=aabc, y = x, fill = group), width = 0.1) + 
+      geom_boxplot(aes(x=aabc, y = x, fill = group)) + 
       #geom_hline(yintercept = median(dplot$x[dplot$aac == "24-48"]), color = "#E18727FF") + 
       labs(x="Age at Blood Collection (Hour)", y = ratioName, fill = label) + 
       scale_x_discrete(labels = xTicks) + 
+      ggsci::scale_fill_npg() + 
       ggsci::scale_color_npg() + 
       theme_light() + theme(text = element_text(size = 12))
     

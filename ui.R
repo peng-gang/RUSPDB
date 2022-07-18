@@ -203,6 +203,223 @@ shinyUI(
     ),
     
     
+    
+    ############ AaBC ############
+    tabPanel(
+      "Age at blood collection",
+      sidebarLayout(
+        sidebarPanel(
+          width = sidebarWidth,
+          tabsetPanel(
+            type = "tabs",
+            id = "AABC",
+            tabPanel(
+              "Analyte",
+              value = "analytesAabc",
+              tags$div(
+                title = "Select one analyte",
+                selectInput(
+                  "analyteAabc",
+                  label = h4("Analyte"),
+                  choices = makeList(analytes_all),
+                  multiple = FALSE,
+                  selected = which(analytes_all=="C3")
+                )
+              ),
+              
+              hr(),
+              
+              
+              tags$div(
+                title = "Select birth weight range to include in the figure",
+                checkboxGroupInput(
+                  "bwAabc",
+                  label = h4("Birth Weight (g)"),
+                  choices = makeList(bw_group),
+                  selected = 2:4
+                )
+              ),
+              
+              tags$div(
+                title = "Select gestational age range to include in the figure",
+                checkboxGroupInput(
+                  "gaAabc",
+                  label = h4("Gestational Age (week)"),
+                  choices = makeList(ga_group),
+                  selected = 2:4
+                )
+              ),
+              
+              
+              tags$div(
+                title = "Select a ethnicity group(s) to include in the figure",
+                radioButtons(
+                  "ethAabcSel",
+                  label = h4("Ethnicity"),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
+                  selected = 1
+                ),
+                
+                uiOutput("uiEthAabc")
+              ),
+              
+              
+              tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexAabc",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
+              
+              tags$div(
+                title = "Select TPN status to include in the figure",
+                checkboxGroupInput(
+                  "tpnAabc",
+                  label = h4("TPN"),
+                  choices = makeList(tpn_group),
+                  selected = 1
+                )
+              ),
+              
+              hr(),
+              
+              tags$div(
+                title = "Compare difference between groups within the selected category",
+                radioButtons("compareAabc", label = h3("Select comparing groups"),
+                             choices = c(makeList(compare_group[compare_group!='Aabc'])), 
+                             selected = 1)
+              ),
+              
+              # hr(),
+              # 
+              # tags$div(
+              #   title = "Select to show smooth line (it will take about 2 mins)",
+              #   checkboxInput("trendAabcSel", label = "Show smooth line", value = FALSE)
+              # ),
+              
+              hr(),
+              
+              actionButton("aabcSubmit", "Submit")
+            ),
+            
+            
+            tabPanel(
+              "Ratios",
+              value = "ratioAabc",
+              
+              tags$div(
+                title = "Select numerator and denominator for the ratio. If multiple analytes are selected in numerator or denominator, they will be added",
+                selectInput(
+                  "numeratorAabc",
+                  label = h4("Numerator"),
+                  choices = makeList(analytes_all),
+                  multiple = TRUE,
+                  selected = which(analytes_all=="C3")
+                ),
+                
+                selectInput(
+                  "denominatorAabc",
+                  label = h4("Denominator"),
+                  choices = makeList(analytes_all),
+                  multiple = TRUE,
+                  selected = which(analytes_all=="C2")
+                )
+              ),
+              
+              hr(),
+              
+              
+              tags$div(
+                title = "Select birth weight range to include in the figure",
+                checkboxGroupInput(
+                  "bwAabcRatio",
+                  label = h4("Birth Weight (g)"),
+                  choices = makeList(bw_group),
+                  selected = 2:4
+                )
+              ),
+              
+              tags$div(
+                title = "Select gestational age range to include in the figure",
+                checkboxGroupInput(
+                  "gaAabcRatio",
+                  label = h4("Gestational Age (week)"),
+                  choices = makeList(ga_group),
+                  selected = 2:4
+                )
+              ),
+              
+              hr(),
+              
+              tags$div(
+                title = "Select a ethnicity group(s) to include in the figure",
+                radioButtons(
+                  "ethAabcSelRatio",
+                  label = h4("Ethnicity"),
+                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
+                  selected = 1
+                ),
+                
+                uiOutput("uiEthAabcRatio")
+              ),
+              
+              
+              tags$div(
+                title = "Select sex to include in the figure",
+                checkboxGroupInput(
+                  "sexAabcRatio",
+                  label = h4("Sex"),
+                  choices = makeList(sex_group),
+                  selected = 1:length(sex_group)
+                )
+              ),
+              
+              tags$div(
+                title = "Select TPN status to include in the figure",
+                checkboxGroupInput(
+                  "tpnAabcRatio",
+                  label = h4("TPN"),
+                  choices = makeList(tpn_group),
+                  selected = 1
+                )
+              ),
+              
+              hr(),
+              
+              tags$div(
+                title = "Compare difference between groups within the selected category",
+                radioButtons("compareAabcRatio", label = h3("Select comparing groups"),
+                             choices = c(makeList(compare_group[compare_group!='Aabc'])), 
+                             selected = 1)
+              ),
+              
+              # hr(),
+              # 
+              # tags$div(
+              #   title = "Select to show smooth line (it will take about 2 mins)",
+              #   checkboxInput("trendAabcRatioSel", label = "Show smooth line", value = FALSE)
+              # ),
+              
+              hr(),
+              
+              actionButton("aabcRatioSubmit", "Submit")
+            )
+            
+          )
+        ),
+        
+        mainPanel(
+          shinycssloaders::withSpinner(plotOutput("boxplotAabc")),
+          hr(),
+          shinycssloaders::withSpinner(plotOutput("trendplotAabc"))
+        )
+      )
+    ),
+    
+    
     ################# ethnicity  #######################
     
     tabPanel(
@@ -619,222 +836,6 @@ shinyUI(
           plotOutput("boxplotSex"),
           hr(),
           DTOutput("tableSex")
-        )
-      )
-    ),
-    
-
-    ############ AaBC ############
-    tabPanel(
-      "Age at blood collection",
-      sidebarLayout(
-        sidebarPanel(
-          width = sidebarWidth,
-          tabsetPanel(
-            type = "tabs",
-            id = "AABC",
-            tabPanel(
-              "Analyte",
-              value = "analytesAabc",
-              tags$div(
-                title = "Select one analyte",
-                selectInput(
-                  "analyteAabc",
-                  label = h4("Analyte"),
-                  choices = makeList(analytes_all),
-                  multiple = FALSE,
-                  selected = which(analytes_all=="C3")
-                )
-              ),
-              
-              hr(),
-              
-              
-              tags$div(
-                title = "Select birth weight range to include in the figure",
-                checkboxGroupInput(
-                  "bwAabc",
-                  label = h4("Birth Weight (g)"),
-                  choices = makeList(bw_group),
-                  selected = 2:4
-                )
-              ),
-              
-              tags$div(
-                title = "Select gestational age range to include in the figure",
-                checkboxGroupInput(
-                  "gaAabc",
-                  label = h4("Gestational Age (week)"),
-                  choices = makeList(ga_group),
-                  selected = 2:4
-                )
-              ),
-            
-              
-              tags$div(
-                title = "Select a ethnicity group(s) to include in the figure",
-                radioButtons(
-                  "ethAabcSel",
-                  label = h4("Ethnicity"),
-                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
-                  selected = 1
-                ),
-                
-                uiOutput("uiEthAabc")
-              ),
-              
-              
-              tags$div(
-                title = "Select sex to include in the figure",
-                checkboxGroupInput(
-                  "sexAabc",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
-                )
-              ),
-              
-              tags$div(
-                title = "Select TPN status to include in the figure",
-                checkboxGroupInput(
-                  "tpnAabc",
-                  label = h4("TPN"),
-                  choices = makeList(tpn_group),
-                  selected = 1
-                )
-              ),
-              
-              hr(),
-              
-              tags$div(
-                title = "Compare difference between groups within the selected category",
-                radioButtons("compareAabc", label = h3("Select comparing groups"),
-                             choices = c(makeList(compare_group[compare_group!='Aabc'])), 
-                             selected = 1)
-              ),
-              
-              # hr(),
-              # 
-              # tags$div(
-              #   title = "Select to show smooth line (it will take about 2 mins)",
-              #   checkboxInput("trendAabcSel", label = "Show smooth line", value = FALSE)
-              # ),
-              
-              hr(),
-              
-              actionButton("aabcSubmit", "Submit")
-            ),
-            
-            
-            tabPanel(
-              "Ratios",
-              value = "ratioAabc",
-              
-              tags$div(
-                title = "Select numerator and denominator for the ratio. If multiple analytes are selected in numerator or denominator, they will be added",
-                selectInput(
-                  "numeratorAabc",
-                  label = h4("Numerator"),
-                  choices = makeList(analytes_all),
-                  multiple = TRUE,
-                  selected = which(analytes_all=="C3")
-                ),
-                
-                selectInput(
-                  "denominatorAabc",
-                  label = h4("Denominator"),
-                  choices = makeList(analytes_all),
-                  multiple = TRUE,
-                  selected = which(analytes_all=="C2")
-                )
-              ),
-              
-              hr(),
-              
-              
-              tags$div(
-                title = "Select birth weight range to include in the figure",
-                checkboxGroupInput(
-                  "bwAabcRatio",
-                  label = h4("Birth Weight (g)"),
-                  choices = makeList(bw_group),
-                  selected = 2:4
-                )
-              ),
-              
-              tags$div(
-                title = "Select gestational age range to include in the figure",
-                checkboxGroupInput(
-                  "gaAabcRatio",
-                  label = h4("Gestational Age (week)"),
-                  choices = makeList(ga_group),
-                  selected = 2:4
-                )
-              ),
-              
-              hr(),
-              
-              tags$div(
-                title = "Select a ethnicity group(s) to include in the figure",
-                radioButtons(
-                  "ethAabcSelRatio",
-                  label = h4("Ethnicity"),
-                  choices = list("Major ethnicity groups" = 1, "Detailed ethnicity groups" = 2),
-                  selected = 1
-                ),
-                
-                uiOutput("uiEthAabcRatio")
-              ),
-              
-              
-              tags$div(
-                title = "Select sex to include in the figure",
-                checkboxGroupInput(
-                  "sexAabcRatio",
-                  label = h4("Sex"),
-                  choices = makeList(sex_group),
-                  selected = 1:length(sex_group)
-                )
-              ),
-              
-              tags$div(
-                title = "Select TPN status to include in the figure",
-                checkboxGroupInput(
-                  "tpnAabcRatio",
-                  label = h4("TPN"),
-                  choices = makeList(tpn_group),
-                  selected = 1
-                )
-              ),
-              
-              hr(),
-              
-              tags$div(
-                title = "Compare difference between groups within the selected category",
-                radioButtons("compareAabcRatio", label = h3("Select comparing groups"),
-                             choices = c(makeList(compare_group[compare_group!='Aabc'])), 
-                             selected = 1)
-              ),
-              
-              # hr(),
-              # 
-              # tags$div(
-              #   title = "Select to show smooth line (it will take about 2 mins)",
-              #   checkboxInput("trendAabcRatioSel", label = "Show smooth line", value = FALSE)
-              # ),
-              
-              hr(),
-              
-              actionButton("aabcRatioSubmit", "Submit")
-            )
-            
-          )
-        ),
-        
-        mainPanel(
-          shinycssloaders::withSpinner(plotOutput("boxplotAabc")),
-          hr(),
-          shinycssloaders::withSpinner(plotOutput("trendplotAabc"))
         )
       )
     ),
